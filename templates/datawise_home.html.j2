@@ -35,28 +35,52 @@
           'logo_url': '#',
           'logo_alt': 'SocialSync logo placeholder',
           'description': 'Placeholder description for SocialSync.',
-          'site_url': '#'
+          'site_url': '#',
+          'social_handles': {
+            'x': '#',
+            'facebook': '#',
+            'instagram': '#',
+            'tiktok': '#'
+          }
         },
         {
           'name': 'ProspectRecon',
           'logo_url': '#',
           'logo_alt': 'ProspectRecon logo placeholder',
           'description': 'Placeholder description for ProspectRecon.',
-          'site_url': '#'
+          'site_url': '#',
+          'social_handles': {
+            'x': '#',
+            'facebook': '#',
+            'instagram': '#',
+            'tiktok': '#'
+          }
         },
         {
           'name': 'StashSage',
           'logo_url': '#',
           'logo_alt': 'StashSage logo placeholder',
           'description': 'Placeholder description for StashSage.',
-          'site_url': '#'
+          'site_url': '#',
+          'social_handles': {
+            'x': '#',
+            'facebook': '#',
+            'instagram': '#',
+            'tiktok': '#'
+          }
         },
         {
           'name': 'Insight Connect',
           'logo_url': '#',
           'logo_alt': 'Insight Connect logo placeholder',
           'description': 'Placeholder description for Insight Connect.',
-          'site_url': '#'
+          'site_url': '#',
+          'social_handles': {
+            'x': '#',
+            'facebook': '#',
+            'instagram': '#',
+            'tiktok': '#'
+          }
         }
       ]) %}
 
@@ -67,6 +91,19 @@
             <h3>{{ project.name }}</h3>
             <p>{{ project.description }}</p>
             <p><a href="{{ project.site_url }}" target="_blank" rel="noopener noreferrer">Visit {{ project.name }}</a></p>
+            {% set project_social_handles = project.social_handles | default({
+              'x': '#',
+              'facebook': '#',
+              'instagram': '#',
+              'tiktok': '#'
+            }) %}
+            <p>
+              Follow {{ project.name }}:
+              <a href="{{ project_social_handles.x }}" target="_blank" rel="noopener noreferrer">X</a>,
+              <a href="{{ project_social_handles.facebook }}" target="_blank" rel="noopener noreferrer">Facebook</a>,
+              <a href="{{ project_social_handles.instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a>,
+              <a href="{{ project_social_handles.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a>
+            </p>
           </article>
         {% endfor %}
       </div>
@@ -81,6 +118,7 @@
           'image_alt': 'Team member image placeholder',
           'position': 'Position placeholder',
           'description': 'Team member bio placeholder.',
+          'minnect_url': '#',
           'linkedin_url': '#'
         }
       ]) %}
@@ -92,7 +130,11 @@
             <h3>{{ member.name }}</h3>
             <p><strong>{{ member.position }}</strong></p>
             <p>{{ member.description }}</p>
-            <p><a href="{{ member.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a></p>
+            <p>
+              <a href="{{ member.minnect_url | default('#') }}" target="_blank" rel="noopener noreferrer">Minnect Profile</a>
+              |
+              <a href="{{ member.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+            </p>
           </article>
         {% endfor %}
       </div>
