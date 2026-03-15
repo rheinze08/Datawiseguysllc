@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ company_name | default('Data WiseGuys, LLC') }}</title>
+</head>
+<body>
+  <header>
+    <h1>{{ company_name | default('Data WiseGuys, LLC') }}</h1>
+    <p>{{ company_tagline | default('Turning data into clear, actionable outcomes.') }}</p>
+
+    <nav aria-label="Social media">
+      <ul>
+        {% set social_links = social_links | default({
+          'x': '#',
+          'facebook': '#',
+          'instagram': '#',
+          'tiktok': '#'
+        }) %}
+        <li><a href="{{ social_links.x }}" target="_blank" rel="noopener noreferrer">X</a></li>
+        <li><a href="{{ social_links.facebook }}" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+        <li><a href="{{ social_links.instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="{{ social_links.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects</h2>
+      {% set projects = projects | default([
+        {
+          'name': 'SocialSync',
+          'logo_url': '#',
+          'logo_alt': 'SocialSync logo placeholder',
+          'description': 'Placeholder description for SocialSync.',
+          'site_url': '#'
+        },
+        {
+          'name': 'ProspectRecon',
+          'logo_url': '#',
+          'logo_alt': 'ProspectRecon logo placeholder',
+          'description': 'Placeholder description for ProspectRecon.',
+          'site_url': '#'
+        },
+        {
+          'name': 'StashSage',
+          'logo_url': '#',
+          'logo_alt': 'StashSage logo placeholder',
+          'description': 'Placeholder description for StashSage.',
+          'site_url': '#'
+        },
+        {
+          'name': 'Insight Connect',
+          'logo_url': '#',
+          'logo_alt': 'Insight Connect logo placeholder',
+          'description': 'Placeholder description for Insight Connect.',
+          'site_url': '#'
+        }
+      ]) %}
+
+      <div class="project-grid">
+        {% for project in projects %}
+          <article class="project-card">
+            <img src="{{ project.logo_url }}" alt="{{ project.logo_alt }}" width="160" height="160">
+            <h3>{{ project.name }}</h3>
+            <p>{{ project.description }}</p>
+            <p><a href="{{ project.site_url }}" target="_blank" rel="noopener noreferrer">Visit {{ project.name }}</a></p>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="team" aria-labelledby="team-title">
+      <h2 id="team-title">Meet the Team</h2>
+      {% set team_members = team_members | default([
+        {
+          'name': 'Team Member Name',
+          'image_url': '#',
+          'image_alt': 'Team member image placeholder',
+          'position': 'Position placeholder',
+          'description': 'Team member bio placeholder.',
+          'linkedin_url': '#'
+        }
+      ]) %}
+
+      <div class="team-grid">
+        {% for member in team_members %}
+          <article class="team-card">
+            <img src="{{ member.image_url }}" alt="{{ member.image_alt }}" width="180" height="180">
+            <h3>{{ member.name }}</h3>
+            <p><strong>{{ member.position }}</strong></p>
+            <p>{{ member.description }}</p>
+            <p><a href="{{ member.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a></p>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+</body>
+</html>
