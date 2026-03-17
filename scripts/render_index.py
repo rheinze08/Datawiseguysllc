@@ -558,7 +558,7 @@ def _render_without_jinja(template_text: str) -> str:
     company_tagline = _extract_default_scalar(
         template_text,
         "company_tagline",
-        "Turning data into clear, actionable outcomes.",
+        "Data WiseGuys builds operator-led software that turns messy workflows and domain data into practical automation, intelligence, and decision-support tools.",
     )
     company_email = _extract_default_scalar(
         template_text,
@@ -692,7 +692,7 @@ def _render_without_jinja(template_text: str) -> str:
     <header class="site-hero" id="top">
       <div class="topbar">
         <div class="brand-lockup">
-          <p class="brand-kicker">Data-led portfolio</p>
+          <p class="brand-kicker">Operator-led software portfolio</p>
           <a class="brand-name" href="#top">{escaped_company_name}</a>
         </div>
 
@@ -743,7 +743,7 @@ def _render_without_jinja(template_text: str) -> str:
             <p class="eyebrow">Current builds</p>
             <h2 id="projects-title">Projects</h2>
           </div>
-          <p>Active ventures and emerging products under the Data WiseGuys portfolio.</p>
+          <p>The portfolio spans social publishing automation, prospect research, AI-assisted analytics, and real-time pricing tools.</p>
         </div>
 
         <div class="project-grid">
@@ -757,7 +757,7 @@ def _render_without_jinja(template_text: str) -> str:
             <p class="eyebrow">Leadership</p>
             <h2 id="team-title">Founder Spotlight</h2>
           </div>
-          <p>The portfolio is led by a founder with a direct hand in execution, product direction, and outreach.</p>
+          <p>The company is built around hands-on product execution, with each product shaped around a clear workflow or decision problem.</p>
         </div>
 
         <div class="team-grid">
@@ -767,7 +767,7 @@ def _render_without_jinja(template_text: str) -> str:
     </main>
 
     <footer class="site-footer">
-      <p class="footer-note"><strong>{escaped_company_name}</strong> keeps portfolio updates, founder details, and project contact points in one place.</p>
+      <p class="footer-note"><strong>{escaped_company_name}</strong> builds focused software that turns workflows, signals, and domain data into practical tools people can use immediately.</p>
       <a class="nav-pill nav-pill-accent" href="mailto:{escaped_company_email}">Get in Touch</a>
     </footer>
   </div>
