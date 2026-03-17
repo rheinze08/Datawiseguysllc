@@ -4,139 +4,724 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Data WiseGuys, LLC</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3ede2;
+      --bg-deep: #e4d9c8;
+      --surface: rgba(255, 252, 247, 0.84);
+      --surface-strong: #fffdf8;
+      --ink: #16243b;
+      --muted: #5d6c75;
+      --brand: #0f766e;
+      --brand-strong: #0c5b55;
+      --accent: #d97745;
+      --line: rgba(22, 36, 59, 0.12);
+      --line-strong: rgba(22, 36, 59, 0.24);
+      --shadow: 0 28px 60px rgba(27, 38, 59, 0.14);
+      --shadow-soft: 0 20px 48px rgba(27, 38, 59, 0.09);
+      --radius-xl: 32px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Palatino Linotype", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(217, 119, 69, 0.18), transparent 26%),
+        radial-gradient(circle at 85% 18%, rgba(15, 118, 110, 0.16), transparent 28%),
+        linear-gradient(180deg, var(--bg) 0%, #f8f4ed 45%, var(--bg-deep) 100%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .site-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+    }
+
+    .site-hero,
+    .section-shell,
+    .site-footer {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .site-hero {
+      border-radius: var(--radius-xl);
+      padding: 24px;
+    }
+
+    .site-hero::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      left: -90px;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: rgba(217, 119, 69, 0.12);
+      filter: blur(18px);
+    }
+
+    .topbar,
+    .section-heading,
+    .site-footer {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-lockup {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .brand-kicker,
+    .eyebrow,
+    .panel-label,
+    .stat-label {
+      margin: 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+
+    .brand-name {
+      text-decoration: none;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .topnav,
+    .hero-actions,
+    .social-row,
+    .project-actions,
+    .profile-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nav-pill,
+    .hero-action,
+    .project-action,
+    .social-pill,
+    .profile-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.76);
+      text-decoration: none;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition:
+        transform 140ms ease,
+        border-color 140ms ease,
+        box-shadow 140ms ease,
+        background 140ms ease;
+    }
+
+    .nav-pill:hover,
+    .hero-action:hover,
+    .project-action:hover,
+    .social-pill:hover,
+    .profile-link:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .nav-pill-accent,
+    .hero-action-primary,
+    .project-action-primary {
+      background: var(--brand);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 30px;
+      align-items: center;
+      padding-top: 38px;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      max-width: 10ch;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: clamp(2.7rem, 7vw, 5.5rem);
+      line-height: 0.95;
+    }
+
+    .hero-text {
+      margin: 20px 0 0;
+      max-width: 38rem;
+      color: var(--muted);
+      font-size: 1.14rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      margin-top: 24px;
+    }
+
+    .social-row {
+      margin-top: 18px;
+    }
+
+    .hero-panel {
+      justify-self: end;
+      width: 100%;
+      max-width: 360px;
+      padding: 24px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(244, 240, 233, 0.88));
+      border: 1px solid rgba(22, 36, 59, 0.10);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-logo-shell,
+    .project-media,
+    .team-photo-wrap {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(217, 119, 69, 0.16));
+    }
+
+    .hero-logo-shell {
+      padding: 22px;
+      border-radius: 24px;
+    }
+
+    .hero-logo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(22, 36, 59, 0.10);
+    }
+
+    .panel-email {
+      display: inline-block;
+      margin-top: 8px;
+      text-decoration: none;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .panel-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .panel-stat {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .panel-stat strong {
+      display: block;
+      margin-top: 4px;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.1rem;
+    }
+
+    .page-sections {
+      display: grid;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .section-shell {
+      padding: 28px;
+      border-radius: 30px;
+    }
+
+    .section-heading {
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      margin: 6px 0 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: clamp(1.9rem, 4vw, 3.1rem);
+    }
+
+    .section-heading p {
+      margin: 0;
+      max-width: 34rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 100%;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 241, 233, 0.82));
+      box-shadow: var(--shadow-soft);
+    }
+
+    .project-media {
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .project-logo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+    }
+
+    .project-card h3 {
+      margin: 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.4rem;
+    }
+
+    .project-description {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .project-actions {
+      margin-top: auto;
+    }
+
+    .social-pill {
+      padding: 10px 14px;
+    }
+
+    .empty-note {
+      margin: 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .section-shell-team {
+      background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(240, 245, 242, 0.78));
+    }
+
+    .team-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .team-card {
+      display: grid;
+      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+      padding: 24px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 240, 236, 0.80));
+      box-shadow: var(--shadow-soft);
+    }
+
+    .team-photo-wrap {
+      padding: 14px;
+      border-radius: 24px;
+    }
+
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .team-copy h3 {
+      margin: 8px 0 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .member-role {
+      margin: 8px 0 0;
+      color: var(--brand-strong);
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .member-description {
+      margin: 16px 0 0;
+      max-width: 42rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .profile-links {
+      margin-top: 22px;
+    }
+
+    .site-footer {
+      margin-top: 24px;
+      padding: 18px 24px;
+      border-radius: 26px;
+      background: rgba(255, 252, 247, 0.72);
+    }
+
+    .footer-note {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .footer-note strong {
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+    }
+
+    @media (max-width: 860px) {
+      .topbar,
+      .section-heading,
+      .site-footer {
+        flex-direction: column;
+      }
+
+      .hero-grid,
+      .team-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        justify-self: stretch;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .site-shell {
+        padding: 16px 14px 32px;
+      }
+
+      .site-hero,
+      .section-shell,
+      .site-footer {
+        padding: 20px;
+      }
+
+      .project-card,
+      .team-card {
+        padding: 18px;
+      }
+
+      .hero-copy h1 {
+        max-width: none;
+      }
+
+      .panel-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Data WiseGuys, LLC</h1>
-    <p>Turning data into clear, actionable outcomes.</p>
-    <p>
-      Contact:
-      <a href="mailto:datawiseguysllc@gmail.com">
-        datawiseguysllc@gmail.com
-      </a>
-    </p>
+  
+  
+  
+  
+  
+  
+  
 
-    <nav aria-label="Social media">
-      <ul>
-        
-        <li><a href="#" target="_blank" rel="noopener noreferrer">X</a></li>
-        <li><a href="#" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-        <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="#" target="_blank" rel="noopener noreferrer">TikTok</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="site-shell">
+    <header class="site-hero" id="top">
+      <div class="topbar">
+        <div class="brand-lockup">
+          <p class="brand-kicker">Data-led portfolio</p>
+          <a class="brand-name" href="#top">Data WiseGuys, LLC</a>
+        </div>
 
-  <main>
-    <section id="projects" aria-labelledby="projects-title">
-      <h2 id="projects-title">Projects</h2>
-      
-
-      <div class="project-grid">
-        
-          <article class="project-card">
-            <img src="docs/socialsync_logo.png" alt="SocialSync logo" width="160" height="160">
-            <h3>SocialSync</h3>
-            <p>Placeholder description for SocialSync.</p>
-            
-            <p>
-              Contact:
-              <a href="mailto:socialsyncdwg@gmail.com">socialsyncdwg@gmail.com</a>
-            </p>
-            
-            <p><a href="#" target="_blank" rel="noopener noreferrer">Visit SocialSync</a></p>
-            
-            <p>
-              Follow SocialSync:
-              <a href="https://x.com/socialsyncdwg" target="_blank" rel="noopener noreferrer">X</a>,
-              <a href="https://www.facebook.com/profile.php?id=61586199493081" target="_blank" rel="noopener noreferrer">Facebook</a>,
-              <a href="https://www.instagram.com/socialsyncdwg/" target="_blank" rel="noopener noreferrer">Instagram</a>,
-              <a href="https://www.tiktok.com/@rolandheinze3?_r=1&_t=ZT-94lRhOOmUYP" target="_blank" rel="noopener noreferrer">TikTok</a>,
-              <a href="https://discord.gg/WUGqSXsryD" target="_blank" rel="noopener noreferrer">Discord</a>
-            </p>
-          </article>
-        
-          <article class="project-card">
-            <img src="docs/prospectrecon_logo_20260317.png" alt="ProspectRecon logo" width="160" height="160">
-            <h3>ProspectRecon</h3>
-            <p>Placeholder description for ProspectRecon.</p>
-            
-            <p><a href="#" target="_blank" rel="noopener noreferrer">Visit ProspectRecon</a></p>
-            
-            <p>
-              Follow ProspectRecon:
-              <a href="#" target="_blank" rel="noopener noreferrer">X</a>,
-              <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>,
-              <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>,
-              <a href="#" target="_blank" rel="noopener noreferrer">TikTok</a>
-            </p>
-          </article>
-        
-          <article class="project-card">
-            <img src="docs/stashsage_logo.png" alt="StashSage logo" width="160" height="160">
-            <h3>StashSage</h3>
-            <p>Placeholder description for StashSage.</p>
-            
-            <p>
-              Contact:
-              <a href="mailto:datawiseguysllc@gmail.com">datawiseguysllc@gmail.com</a>
-            </p>
-            
-            <p><a href="#" target="_blank" rel="noopener noreferrer">Visit StashSage</a></p>
-            
-            <p>
-              Follow StashSage:
-              <a href="https://x.com/rheinze08" target="_blank" rel="noopener noreferrer">X</a>,
-              <a href="https://www.facebook.com/profile.php?id=61582292837909" target="_blank" rel="noopener noreferrer">Facebook</a>,
-              <a href="https://www.instagram.com/heinze_roland/" target="_blank" rel="noopener noreferrer">Instagram</a>,
-              <a href="#" target="_blank" rel="noopener noreferrer">TikTok</a>,
-              <a href="https://discord.gg/k58TnRgFPb" target="_blank" rel="noopener noreferrer">Discord</a>
-            </p>
-          </article>
-        
-          <article class="project-card">
-            <img src="docs/insight_connect_logo_20260310.png" alt="Insight Connect logo" width="160" height="160">
-            <h3>Insight Connect</h3>
-            <p>Placeholder description for Insight Connect.</p>
-            
-            <p><a href="#" target="_blank" rel="noopener noreferrer">Visit Insight Connect</a></p>
-            
-            <p>
-              Follow Insight Connect:
-              <a href="#" target="_blank" rel="noopener noreferrer">X</a>,
-              <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>,
-              <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>,
-              <a href="#" target="_blank" rel="noopener noreferrer">TikTok</a>
-            </p>
-          </article>
-        
+        <nav class="topnav" aria-label="Primary">
+          <a class="nav-pill" href="#projects">Projects</a>
+          <a class="nav-pill" href="#team">Founder</a>
+          <a class="nav-pill nav-pill-accent" href="mailto:datawiseguysllc@gmail.com">Contact</a>
+        </nav>
       </div>
-    </section>
 
-    <section id="team" aria-labelledby="team-title">
-      <h2 id="team-title">Meet the Team</h2>
-      
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Operator-led data ventures</p>
+          <h1>Data WiseGuys, LLC</h1>
+          <p class="hero-text">Turning data into clear, actionable outcomes.</p>
 
-      <div class="team-grid">
-        
+          <div class="hero-actions">
+            <a class="hero-action hero-action-primary" href="#projects">Explore Projects</a>
+            <a class="hero-action" href="mailto:datawiseguysllc@gmail.com">datawiseguysllc@gmail.com</a>
+          </div>
+
+          
+        </div>
+
+        <aside class="hero-panel">
+          <div class="hero-logo-shell">
+            <img class="hero-logo" src="docs/data_wiseguys_logo_20230401.jpg" alt="Data WiseGuys, LLC logo">
+          </div>
+          <p class="panel-label">Primary contact</p>
+          <a class="panel-email" href="mailto:datawiseguysllc@gmail.com">datawiseguysllc@gmail.com</a>
+
+          <div class="panel-meta">
+            <div class="panel-stat">
+              <span class="stat-label">Founder</span>
+              <strong>Roland Heinze</strong>
+            </div>
+            <div class="panel-stat">
+              <span class="stat-label">Projects</span>
+              <strong>4</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <main class="page-sections">
+      <section class="section-shell" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Current builds</p>
+            <h2 id="projects-title">Projects</h2>
+          </div>
+          <p>Active ventures and emerging products under the Data WiseGuys portfolio.</p>
+        </div>
+
+        <div class="project-grid">
+          
+            
+            
+            
+
+          <article class="project-card">
+            <div class="project-media">
+              <img class="project-logo" src="docs/socialsync_logo.png" alt="SocialSync logo">
+            </div>
+
+            <div class="project-copy">
+              <h3>SocialSync</h3>
+              <p class="project-description">More details coming soon.</p>
+            </div>
+
+            
+            <div class="project-actions">
+              
+              
+              <a class="project-action" href="mailto:socialsyncdwg@gmail.com">Email</a>
+              
+            </div>
+            
+
+            
+            <div class="social-row">
+              
+              <a class="social-pill" href="https://x.com/socialsyncdwg" target="_blank" rel="noopener noreferrer">X</a>
+              
+              
+              <a class="social-pill" href="https://www.facebook.com/profile.php?id=61586199493081" target="_blank" rel="noopener noreferrer">Facebook</a>
+              
+              
+              <a class="social-pill" href="https://www.instagram.com/socialsyncdwg/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              
+              
+              <a class="social-pill" href="https://www.tiktok.com/@rolandheinze3?_r=1&_t=ZT-94lRhOOmUYP" target="_blank" rel="noopener noreferrer">TikTok</a>
+              
+              
+              <a class="social-pill" href="https://discord.gg/WUGqSXsryD" target="_blank" rel="noopener noreferrer">Discord</a>
+              
+            </div>
+            
+
+            
+          </article>
+          
+            
+            
+            
+
+          <article class="project-card">
+            <div class="project-media">
+              <img class="project-logo" src="docs/prospectrecon_logo_20260317.png" alt="ProspectRecon logo">
+            </div>
+
+            <div class="project-copy">
+              <h3>ProspectRecon</h3>
+              <p class="project-description">More details coming soon.</p>
+            </div>
+
+            
+
+            
+
+            
+            <p class="empty-note">Launch details coming soon.</p>
+            
+          </article>
+          
+            
+            
+            
+
+          <article class="project-card">
+            <div class="project-media">
+              <img class="project-logo" src="docs/stashsage_logo.png" alt="StashSage logo">
+            </div>
+
+            <div class="project-copy">
+              <h3>StashSage</h3>
+              <p class="project-description">More details coming soon.</p>
+            </div>
+
+            
+            <div class="project-actions">
+              
+              
+              <a class="project-action" href="mailto:datawiseguysllc@gmail.com">Email</a>
+              
+            </div>
+            
+
+            
+            <div class="social-row">
+              
+              <a class="social-pill" href="https://x.com/rheinze08" target="_blank" rel="noopener noreferrer">X</a>
+              
+              
+              <a class="social-pill" href="https://www.facebook.com/profile.php?id=61582292837909" target="_blank" rel="noopener noreferrer">Facebook</a>
+              
+              
+              <a class="social-pill" href="https://www.instagram.com/heinze_roland/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              
+              
+              
+              <a class="social-pill" href="https://discord.gg/k58TnRgFPb" target="_blank" rel="noopener noreferrer">Discord</a>
+              
+            </div>
+            
+
+            
+          </article>
+          
+            
+            
+            
+
+          <article class="project-card">
+            <div class="project-media">
+              <img class="project-logo" src="docs/insight_connect_logo_20260310.png" alt="Insight Connect logo">
+            </div>
+
+            <div class="project-copy">
+              <h3>Insight Connect</h3>
+              <p class="project-description">More details coming soon.</p>
+            </div>
+
+            
+
+            
+
+            
+            <p class="empty-note">Launch details coming soon.</p>
+            
+          </article>
+          
+        </div>
+      </section>
+
+      <section class="section-shell section-shell-team" id="team" aria-labelledby="team-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Leadership</p>
+            <h2 id="team-title">Founder Spotlight</h2>
+          </div>
+          <p>The portfolio is led by a founder with a direct hand in execution, product direction, and outreach.</p>
+        </div>
+
+        <div class="team-grid">
+          
           <article class="team-card">
-            <img src="docs/roland_heinze_portrait_20260317.png" alt="Portrait of Roland Heinze" width="180" height="180">
-            <h3>Roland Heinze</h3>
-            <p><strong>Founder, CEO</strong></p>
-            <p>Founder and CEO of Data WiseGuys, LLC.</p>
-            
-            <p>
+            <div class="team-photo-wrap">
+              <img class="team-photo" src="docs/roland_heinze_portrait_20260317.png" alt="Portrait of Roland Heinze">
+            </div>
+
+            <div class="team-copy">
+              <p class="eyebrow">Founder-led</p>
+              <h3>Roland Heinze</h3>
+              <p class="member-role">Founder, CEO</p>
+              <p class="member-description">Founder and CEO of Data WiseGuys, LLC.</p>
+
               
+              <div class="profile-links">
+                
+                <a class="profile-link" href="https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                
+                
+              </div>
               
-              
-              <a href="https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
-              
-            </p>
-            
+            </div>
           </article>
-        
-      </div>
-    </section>
-  </main>
+          
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-note"><strong>Data WiseGuys, LLC</strong> keeps portfolio updates, founder details, and project contact points in one place.</p>
+      <a class="nav-pill nav-pill-accent" href="mailto:datawiseguysllc@gmail.com">Get in Touch</a>
+    </footer>
+  </div>
 </body>
 </html>

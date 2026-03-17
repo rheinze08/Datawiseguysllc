@@ -4,166 +4,740 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ company_name | default('Data WiseGuys, LLC') }}</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3ede2;
+      --bg-deep: #e4d9c8;
+      --surface: rgba(255, 252, 247, 0.84);
+      --surface-strong: #fffdf8;
+      --ink: #16243b;
+      --muted: #5d6c75;
+      --brand: #0f766e;
+      --brand-strong: #0c5b55;
+      --accent: #d97745;
+      --line: rgba(22, 36, 59, 0.12);
+      --line-strong: rgba(22, 36, 59, 0.24);
+      --shadow: 0 28px 60px rgba(27, 38, 59, 0.14);
+      --shadow-soft: 0 20px 48px rgba(27, 38, 59, 0.09);
+      --radius-xl: 32px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Palatino Linotype", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(217, 119, 69, 0.18), transparent 26%),
+        radial-gradient(circle at 85% 18%, rgba(15, 118, 110, 0.16), transparent 28%),
+        linear-gradient(180deg, var(--bg) 0%, #f8f4ed 45%, var(--bg-deep) 100%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .site-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+    }
+
+    .site-hero,
+    .section-shell,
+    .site-footer {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .site-hero {
+      border-radius: var(--radius-xl);
+      padding: 24px;
+    }
+
+    .site-hero::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      left: -90px;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: rgba(217, 119, 69, 0.12);
+      filter: blur(18px);
+    }
+
+    .topbar,
+    .section-heading,
+    .site-footer {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-lockup {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .brand-kicker,
+    .eyebrow,
+    .panel-label,
+    .stat-label {
+      margin: 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+
+    .brand-name {
+      text-decoration: none;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .topnav,
+    .hero-actions,
+    .social-row,
+    .project-actions,
+    .profile-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nav-pill,
+    .hero-action,
+    .project-action,
+    .social-pill,
+    .profile-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.76);
+      text-decoration: none;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition:
+        transform 140ms ease,
+        border-color 140ms ease,
+        box-shadow 140ms ease,
+        background 140ms ease;
+    }
+
+    .nav-pill:hover,
+    .hero-action:hover,
+    .project-action:hover,
+    .social-pill:hover,
+    .profile-link:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .nav-pill-accent,
+    .hero-action-primary,
+    .project-action-primary {
+      background: var(--brand);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 30px;
+      align-items: center;
+      padding-top: 38px;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      max-width: 10ch;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: clamp(2.7rem, 7vw, 5.5rem);
+      line-height: 0.95;
+    }
+
+    .hero-text {
+      margin: 20px 0 0;
+      max-width: 38rem;
+      color: var(--muted);
+      font-size: 1.14rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      margin-top: 24px;
+    }
+
+    .social-row {
+      margin-top: 18px;
+    }
+
+    .hero-panel {
+      justify-self: end;
+      width: 100%;
+      max-width: 360px;
+      padding: 24px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(244, 240, 233, 0.88));
+      border: 1px solid rgba(22, 36, 59, 0.10);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-logo-shell,
+    .project-media,
+    .team-photo-wrap {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(217, 119, 69, 0.16));
+    }
+
+    .hero-logo-shell {
+      padding: 22px;
+      border-radius: 24px;
+    }
+
+    .hero-logo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(22, 36, 59, 0.10);
+    }
+
+    .panel-email {
+      display: inline-block;
+      margin-top: 8px;
+      text-decoration: none;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .panel-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .panel-stat {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .panel-stat strong {
+      display: block;
+      margin-top: 4px;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.1rem;
+    }
+
+    .page-sections {
+      display: grid;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .section-shell {
+      padding: 28px;
+      border-radius: 30px;
+    }
+
+    .section-heading {
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      margin: 6px 0 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: clamp(1.9rem, 4vw, 3.1rem);
+    }
+
+    .section-heading p {
+      margin: 0;
+      max-width: 34rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 100%;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 241, 233, 0.82));
+      box-shadow: var(--shadow-soft);
+    }
+
+    .project-media {
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .project-logo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+    }
+
+    .project-card h3 {
+      margin: 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.4rem;
+    }
+
+    .project-description {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .project-actions {
+      margin-top: auto;
+    }
+
+    .social-pill {
+      padding: 10px 14px;
+    }
+
+    .empty-note {
+      margin: 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .section-shell-team {
+      background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(240, 245, 242, 0.78));
+    }
+
+    .team-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .team-card {
+      display: grid;
+      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+      padding: 24px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 240, 236, 0.80));
+      box-shadow: var(--shadow-soft);
+    }
+
+    .team-photo-wrap {
+      padding: 14px;
+      border-radius: 24px;
+    }
+
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .team-copy h3 {
+      margin: 8px 0 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .member-role {
+      margin: 8px 0 0;
+      color: var(--brand-strong);
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .member-description {
+      margin: 16px 0 0;
+      max-width: 42rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .profile-links {
+      margin-top: 22px;
+    }
+
+    .site-footer {
+      margin-top: 24px;
+      padding: 18px 24px;
+      border-radius: 26px;
+      background: rgba(255, 252, 247, 0.72);
+    }
+
+    .footer-note {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .footer-note strong {
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+    }
+
+    @media (max-width: 860px) {
+      .topbar,
+      .section-heading,
+      .site-footer {
+        flex-direction: column;
+      }
+
+      .hero-grid,
+      .team-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        justify-self: stretch;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .site-shell {
+        padding: 16px 14px 32px;
+      }
+
+      .site-hero,
+      .section-shell,
+      .site-footer {
+        padding: 20px;
+      }
+
+      .project-card,
+      .team-card {
+        padding: 18px;
+      }
+
+      .hero-copy h1 {
+        max-width: none;
+      }
+
+      .panel-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>{{ company_name | default('Data WiseGuys, LLC') }}</h1>
-    <p>{{ company_tagline | default('Turning data into clear, actionable outcomes.') }}</p>
-    <p>
-      Contact:
-      <a href="mailto:{{ company_email | default('datawiseguysllc@gmail.com') }}">
-        {{ company_email | default('datawiseguysllc@gmail.com') }}
-      </a>
-    </p>
+  {% set company_name = company_name | default('Data WiseGuys, LLC') %}
+  {% set company_tagline = company_tagline | default('Turning data into clear, actionable outcomes.') %}
+  {% set company_email = company_email | default('datawiseguysllc@gmail.com') %}
+  {% set company_logo_url = company_logo_url | default('docs/data_wiseguys_logo_20230401.jpg') %}
+  {% set social_links = social_links | default({
+    'x': '#',
+    'facebook': '#',
+    'instagram': '#',
+    'tiktok': '#'
+  }) %}
+  {% set projects = projects | default([
+    {
+      'name': 'SocialSync',
+      'logo_url': 'docs/socialsync_logo.png',
+      'logo_alt': 'SocialSync logo',
+      'contact_email': 'socialsyncdwg@gmail.com',
+      'description': 'More details coming soon.',
+      'site_url': '#',
+      'social_handles': {
+        'x': 'https://x.com/socialsyncdwg',
+        'facebook': 'https://www.facebook.com/profile.php?id=61586199493081',
+        'instagram': 'https://www.instagram.com/socialsyncdwg/',
+        'tiktok': 'https://www.tiktok.com/@rolandheinze3?_r=1&_t=ZT-94lRhOOmUYP',
+        'discord': 'https://discord.gg/WUGqSXsryD'
+      }
+    },
+    {
+      'name': 'ProspectRecon',
+      'logo_url': 'docs/prospectrecon_logo_20260317.png',
+      'logo_alt': 'ProspectRecon logo',
+      'contact_email': '',
+      'description': 'More details coming soon.',
+      'site_url': '#',
+      'social_handles': {
+        'x': '#',
+        'facebook': '#',
+        'instagram': '#',
+        'tiktok': '#'
+      }
+    },
+    {
+      'name': 'StashSage',
+      'logo_url': 'docs/stashsage_logo.png',
+      'logo_alt': 'StashSage logo',
+      'contact_email': 'datawiseguysllc@gmail.com',
+      'description': 'More details coming soon.',
+      'site_url': '#',
+      'social_handles': {
+        'x': 'https://x.com/rheinze08',
+        'facebook': 'https://www.facebook.com/profile.php?id=61582292837909',
+        'instagram': 'https://www.instagram.com/heinze_roland/',
+        'tiktok': '#',
+        'discord': 'https://discord.gg/k58TnRgFPb'
+      }
+    },
+    {
+      'name': 'Insight Connect',
+      'logo_url': 'docs/insight_connect_logo_20260310.png',
+      'logo_alt': 'Insight Connect logo',
+      'contact_email': '',
+      'description': 'More details coming soon.',
+      'site_url': '#',
+      'social_handles': {
+        'x': '#',
+        'facebook': '#',
+        'instagram': '#',
+        'tiktok': '#'
+      }
+    }
+  ]) %}
+  {% set team_members = team_members | default([
+    {
+      'name': 'Roland Heinze',
+      'image_url': 'docs/roland_heinze_portrait_20260317.png',
+      'image_alt': 'Portrait of Roland Heinze',
+      'position': 'Founder, CEO',
+      'description': 'Founder and CEO of Data WiseGuys, LLC.',
+      'minnect_url': '',
+      'linkedin_url': 'https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav'
+    }
+  ]) %}
 
-    <nav aria-label="Social media">
-      <ul>
-        {% set social_links = social_links | default({
-          'x': '#',
-          'facebook': '#',
-          'instagram': '#',
-          'tiktok': '#'
-        }) %}
-        <li><a href="{{ social_links.x }}" target="_blank" rel="noopener noreferrer">X</a></li>
-        <li><a href="{{ social_links.facebook }}" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-        <li><a href="{{ social_links.instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="{{ social_links.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="site-shell">
+    <header class="site-hero" id="top">
+      <div class="topbar">
+        <div class="brand-lockup">
+          <p class="brand-kicker">Data-led portfolio</p>
+          <a class="brand-name" href="#top">{{ company_name }}</a>
+        </div>
 
-  <main>
-    <section id="projects" aria-labelledby="projects-title">
-      <h2 id="projects-title">Projects</h2>
-      {% set projects = projects | default([
-        {
-          'name': 'SocialSync',
-          'logo_url': 'docs/socialsync_logo.png',
-          'logo_alt': 'SocialSync logo',
-          'contact_email': 'socialsyncdwg@gmail.com',
-          'description': 'Placeholder description for SocialSync.',
-          'site_url': '#',
-          'social_handles': {
-            'x': 'https://x.com/socialsyncdwg',
-            'facebook': 'https://www.facebook.com/profile.php?id=61586199493081',
-            'instagram': 'https://www.instagram.com/socialsyncdwg/',
-            'tiktok': 'https://www.tiktok.com/@rolandheinze3?_r=1&_t=ZT-94lRhOOmUYP',
-            'discord': 'https://discord.gg/WUGqSXsryD'
-          }
-        },
-        {
-          'name': 'ProspectRecon',
-          'logo_url': 'docs/prospectrecon_logo_20260317.png',
-          'logo_alt': 'ProspectRecon logo',
-          'contact_email': '',
-          'description': 'Placeholder description for ProspectRecon.',
-          'site_url': '#',
-          'social_handles': {
-            'x': '#',
-            'facebook': '#',
-            'instagram': '#',
-            'tiktok': '#'
-          }
-        },
-        {
-          'name': 'StashSage',
-          'logo_url': 'docs/stashsage_logo.png',
-          'logo_alt': 'StashSage logo',
-          'contact_email': 'datawiseguysllc@gmail.com',
-          'description': 'Placeholder description for StashSage.',
-          'site_url': '#',
-          'social_handles': {
-            'x': 'https://x.com/rheinze08',
-            'facebook': 'https://www.facebook.com/profile.php?id=61582292837909',
-            'instagram': 'https://www.instagram.com/heinze_roland/',
-            'tiktok': '#',
-            'discord': 'https://discord.gg/k58TnRgFPb'
-          }
-        },
-        {
-          'name': 'Insight Connect',
-          'logo_url': 'docs/insight_connect_logo_20260310.png',
-          'logo_alt': 'Insight Connect logo',
-          'contact_email': '',
-          'description': 'Placeholder description for Insight Connect.',
-          'site_url': '#',
-          'social_handles': {
-            'x': '#',
-            'facebook': '#',
-            'instagram': '#',
-            'tiktok': '#'
-          }
-        }
-      ]) %}
+        <nav class="topnav" aria-label="Primary">
+          <a class="nav-pill" href="#projects">Projects</a>
+          <a class="nav-pill" href="#team">Founder</a>
+          <a class="nav-pill nav-pill-accent" href="mailto:{{ company_email }}">Contact</a>
+        </nav>
+      </div>
 
-      <div class="project-grid">
-        {% for project in projects %}
-          <article class="project-card">
-            <img src="{{ project.logo_url }}" alt="{{ project.logo_alt }}" width="160" height="160">
-            <h3>{{ project.name }}</h3>
-            <p>{{ project.description }}</p>
-            {% if project.contact_email %}
-            <p>
-              Contact:
-              <a href="mailto:{{ project.contact_email }}">{{ project.contact_email }}</a>
-            </p>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Operator-led data ventures</p>
+          <h1>{{ company_name }}</h1>
+          <p class="hero-text">{{ company_tagline }}</p>
+
+          <div class="hero-actions">
+            <a class="hero-action hero-action-primary" href="#projects">Explore Projects</a>
+            <a class="hero-action" href="mailto:{{ company_email }}">{{ company_email }}</a>
+          </div>
+
+          {% if social_links.x != '#' or social_links.facebook != '#' or social_links.instagram != '#' or social_links.tiktok != '#' %}
+          <div class="social-row">
+            {% if social_links.x != '#' %}
+            <a class="social-pill" href="{{ social_links.x }}" target="_blank" rel="noopener noreferrer">X</a>
             {% endif %}
-            <p><a href="{{ project.site_url }}" target="_blank" rel="noopener noreferrer">Visit {{ project.name }}</a></p>
+            {% if social_links.facebook != '#' %}
+            <a class="social-pill" href="{{ social_links.facebook }}" target="_blank" rel="noopener noreferrer">Facebook</a>
+            {% endif %}
+            {% if social_links.instagram != '#' %}
+            <a class="social-pill" href="{{ social_links.instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a>
+            {% endif %}
+            {% if social_links.tiktok != '#' %}
+            <a class="social-pill" href="{{ social_links.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+
+        <aside class="hero-panel">
+          <div class="hero-logo-shell">
+            <img class="hero-logo" src="{{ company_logo_url }}" alt="Data WiseGuys, LLC logo">
+          </div>
+          <p class="panel-label">Primary contact</p>
+          <a class="panel-email" href="mailto:{{ company_email }}">{{ company_email }}</a>
+
+          <div class="panel-meta">
+            <div class="panel-stat">
+              <span class="stat-label">Founder</span>
+              <strong>Roland Heinze</strong>
+            </div>
+            <div class="panel-stat">
+              <span class="stat-label">Projects</span>
+              <strong>{{ projects | length }}</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <main class="page-sections">
+      <section class="section-shell" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Current builds</p>
+            <h2 id="projects-title">Projects</h2>
+          </div>
+          <p>Active ventures and emerging products under the Data WiseGuys portfolio.</p>
+        </div>
+
+        <div class="project-grid">
+          {% for project in projects %}
             {% set project_social_handles = project.social_handles | default({
               'x': '#',
               'facebook': '#',
               'instagram': '#',
               'tiktok': '#'
             }) %}
-            <p>
-              Follow {{ project.name }}:
-              <a href="{{ project_social_handles.x }}" target="_blank" rel="noopener noreferrer">X</a>,
-              <a href="{{ project_social_handles.facebook }}" target="_blank" rel="noopener noreferrer">Facebook</a>,
-              <a href="{{ project_social_handles.instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a>,
-              <a href="{{ project_social_handles.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a>{% if project_social_handles.discord and project_social_handles.discord != '#' %},
-              <a href="{{ project_social_handles.discord }}" target="_blank" rel="noopener noreferrer">Discord</a>{% endif %}
-            </p>
-          </article>
-        {% endfor %}
-      </div>
-    </section>
+            {% set has_project_site = project.site_url and project.site_url != '#' %}
+            {% set has_project_social = (
+              (project_social_handles.x and project_social_handles.x != '#') or
+              (project_social_handles.facebook and project_social_handles.facebook != '#') or
+              (project_social_handles.instagram and project_social_handles.instagram != '#') or
+              (project_social_handles.tiktok and project_social_handles.tiktok != '#') or
+              (project_social_handles.discord and project_social_handles.discord != '#')
+            ) %}
 
-    <section id="team" aria-labelledby="team-title">
-      <h2 id="team-title">Meet the Team</h2>
-      {% set team_members = team_members | default([
-        {
-          'name': 'Roland Heinze',
-          'image_url': 'docs/roland_heinze_portrait_20260317.png',
-          'image_alt': 'Portrait of Roland Heinze',
-          'position': 'Founder, CEO',
-          'description': 'Founder and CEO of Data WiseGuys, LLC.',
-          'minnect_url': '',
-          'linkedin_url': 'https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav'
-        }
-      ]) %}
+          <article class="project-card">
+            <div class="project-media">
+              <img class="project-logo" src="{{ project.logo_url }}" alt="{{ project.logo_alt }}">
+            </div>
 
-      <div class="team-grid">
-        {% for member in team_members %}
-          <article class="team-card">
-            <img src="{{ member.image_url }}" alt="{{ member.image_alt }}" width="180" height="180">
-            <h3>{{ member.name }}</h3>
-            <p><strong>{{ member.position }}</strong></p>
-            <p>{{ member.description }}</p>
-            {% if member.minnect_url or member.linkedin_url %}
-            <p>
-              {% if member.minnect_url %}
-              <a href="{{ member.minnect_url }}" target="_blank" rel="noopener noreferrer">Minnect Profile</a>
+            <div class="project-copy">
+              <h3>{{ project.name }}</h3>
+              <p class="project-description">{{ project.description }}</p>
+            </div>
+
+            {% if has_project_site or project.contact_email %}
+            <div class="project-actions">
+              {% if has_project_site %}
+              <a class="project-action project-action-primary" href="{{ project.site_url }}" target="_blank" rel="noopener noreferrer">Visit Site</a>
               {% endif %}
-              {% if member.minnect_url and member.linkedin_url %}|{% endif %}
-              {% if member.linkedin_url %}
-              <a href="{{ member.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+              {% if project.contact_email %}
+              <a class="project-action" href="mailto:{{ project.contact_email }}">Email</a>
               {% endif %}
-            </p>
+            </div>
+            {% endif %}
+
+            {% if has_project_social %}
+            <div class="social-row">
+              {% if project_social_handles.x and project_social_handles.x != '#' %}
+              <a class="social-pill" href="{{ project_social_handles.x }}" target="_blank" rel="noopener noreferrer">X</a>
+              {% endif %}
+              {% if project_social_handles.facebook and project_social_handles.facebook != '#' %}
+              <a class="social-pill" href="{{ project_social_handles.facebook }}" target="_blank" rel="noopener noreferrer">Facebook</a>
+              {% endif %}
+              {% if project_social_handles.instagram and project_social_handles.instagram != '#' %}
+              <a class="social-pill" href="{{ project_social_handles.instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a>
+              {% endif %}
+              {% if project_social_handles.tiktok and project_social_handles.tiktok != '#' %}
+              <a class="social-pill" href="{{ project_social_handles.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a>
+              {% endif %}
+              {% if project_social_handles.discord and project_social_handles.discord != '#' %}
+              <a class="social-pill" href="{{ project_social_handles.discord }}" target="_blank" rel="noopener noreferrer">Discord</a>
+              {% endif %}
+            </div>
+            {% endif %}
+
+            {% if not has_project_site and not project.contact_email and not has_project_social %}
+            <p class="empty-note">Launch details coming soon.</p>
             {% endif %}
           </article>
-        {% endfor %}
-      </div>
-    </section>
-  </main>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="section-shell section-shell-team" id="team" aria-labelledby="team-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Leadership</p>
+            <h2 id="team-title">Founder Spotlight</h2>
+          </div>
+          <p>The portfolio is led by a founder with a direct hand in execution, product direction, and outreach.</p>
+        </div>
+
+        <div class="team-grid">
+          {% for member in team_members %}
+          <article class="team-card">
+            <div class="team-photo-wrap">
+              <img class="team-photo" src="{{ member.image_url }}" alt="{{ member.image_alt }}">
+            </div>
+
+            <div class="team-copy">
+              <p class="eyebrow">Founder-led</p>
+              <h3>{{ member.name }}</h3>
+              <p class="member-role">{{ member.position }}</p>
+              <p class="member-description">{{ member.description }}</p>
+
+              {% if member.minnect_url or member.linkedin_url %}
+              <div class="profile-links">
+                {% if member.linkedin_url %}
+                <a class="profile-link" href="{{ member.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                {% endif %}
+                {% if member.minnect_url %}
+                <a class="profile-link" href="{{ member.minnect_url }}" target="_blank" rel="noopener noreferrer">Minnect</a>
+                {% endif %}
+              </div>
+              {% endif %}
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-note"><strong>{{ company_name }}</strong> keeps portfolio updates, founder details, and project contact points in one place.</p>
+      <a class="nav-pill nav-pill-accent" href="mailto:{{ company_email }}">Get in Touch</a>
+    </footer>
+  </div>
 </body>
 </html>
