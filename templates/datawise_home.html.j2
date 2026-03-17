@@ -9,6 +9,12 @@
   <header>
     <h1>{{ company_name | default('Data WiseGuys, LLC') }}</h1>
     <p>{{ company_tagline | default('Turning data into clear, actionable outcomes.') }}</p>
+    <p>
+      Contact:
+      <a href="mailto:{{ company_email | default('datawiseguysllc@gmail.com') }}">
+        {{ company_email | default('datawiseguysllc@gmail.com') }}
+      </a>
+    </p>
 
     <nav aria-label="Social media">
       <ul>
@@ -32,21 +38,24 @@
       {% set projects = projects | default([
         {
           'name': 'SocialSync',
-          'logo_url': '#',
-          'logo_alt': 'SocialSync logo placeholder',
+          'logo_url': 'docs/socialsync_logo.png',
+          'logo_alt': 'SocialSync logo',
+          'contact_email': 'socialsyncdwg@gmail.com',
           'description': 'Placeholder description for SocialSync.',
           'site_url': '#',
           'social_handles': {
-            'x': '#',
-            'facebook': '#',
-            'instagram': '#',
-            'tiktok': '#'
+            'x': 'https://x.com/socialsyncdwg',
+            'facebook': 'https://www.facebook.com/profile.php?id=61586199493081',
+            'instagram': 'https://www.instagram.com/socialsyncdwg/',
+            'tiktok': 'https://www.tiktok.com/@rolandheinze3?_r=1&_t=ZT-94lRhOOmUYP',
+            'discord': 'https://discord.gg/WUGqSXsryD'
           }
         },
         {
           'name': 'ProspectRecon',
-          'logo_url': '#',
-          'logo_alt': 'ProspectRecon logo placeholder',
+          'logo_url': 'docs/prospectrecon_logo_20260317.png',
+          'logo_alt': 'ProspectRecon logo',
+          'contact_email': '',
           'description': 'Placeholder description for ProspectRecon.',
           'site_url': '#',
           'social_handles': {
@@ -58,21 +67,24 @@
         },
         {
           'name': 'StashSage',
-          'logo_url': '#',
-          'logo_alt': 'StashSage logo placeholder',
+          'logo_url': 'docs/stashsage_logo.png',
+          'logo_alt': 'StashSage logo',
+          'contact_email': 'datawiseguysllc@gmail.com',
           'description': 'Placeholder description for StashSage.',
           'site_url': '#',
           'social_handles': {
-            'x': '#',
-            'facebook': '#',
-            'instagram': '#',
-            'tiktok': '#'
+            'x': 'https://x.com/rheinze08',
+            'facebook': 'https://www.facebook.com/profile.php?id=61582292837909',
+            'instagram': 'https://www.instagram.com/heinze_roland/',
+            'tiktok': '#',
+            'discord': 'https://discord.gg/k58TnRgFPb'
           }
         },
         {
           'name': 'Insight Connect',
-          'logo_url': '#',
-          'logo_alt': 'Insight Connect logo placeholder',
+          'logo_url': 'docs/insight_connect_logo_20260310.png',
+          'logo_alt': 'Insight Connect logo',
+          'contact_email': '',
           'description': 'Placeholder description for Insight Connect.',
           'site_url': '#',
           'social_handles': {
@@ -90,6 +102,12 @@
             <img src="{{ project.logo_url }}" alt="{{ project.logo_alt }}" width="160" height="160">
             <h3>{{ project.name }}</h3>
             <p>{{ project.description }}</p>
+            {% if project.contact_email %}
+            <p>
+              Contact:
+              <a href="mailto:{{ project.contact_email }}">{{ project.contact_email }}</a>
+            </p>
+            {% endif %}
             <p><a href="{{ project.site_url }}" target="_blank" rel="noopener noreferrer">Visit {{ project.name }}</a></p>
             {% set project_social_handles = project.social_handles | default({
               'x': '#',
@@ -102,7 +120,8 @@
               <a href="{{ project_social_handles.x }}" target="_blank" rel="noopener noreferrer">X</a>,
               <a href="{{ project_social_handles.facebook }}" target="_blank" rel="noopener noreferrer">Facebook</a>,
               <a href="{{ project_social_handles.instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a>,
-              <a href="{{ project_social_handles.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a>
+              <a href="{{ project_social_handles.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a>{% if project_social_handles.discord and project_social_handles.discord != '#' %},
+              <a href="{{ project_social_handles.discord }}" target="_blank" rel="noopener noreferrer">Discord</a>{% endif %}
             </p>
           </article>
         {% endfor %}
@@ -113,13 +132,13 @@
       <h2 id="team-title">Meet the Team</h2>
       {% set team_members = team_members | default([
         {
-          'name': 'Team Member Name',
-          'image_url': '#',
-          'image_alt': 'Team member image placeholder',
-          'position': 'Position placeholder',
-          'description': 'Team member bio placeholder.',
-          'minnect_url': '#',
-          'linkedin_url': '#'
+          'name': 'Roland Heinze',
+          'image_url': 'docs/roland_heinze_portrait_20260317.png',
+          'image_alt': 'Portrait of Roland Heinze',
+          'position': 'Founder, CEO',
+          'description': 'Founder and CEO of Data WiseGuys, LLC.',
+          'minnect_url': '',
+          'linkedin_url': 'https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav'
         }
       ]) %}
 
@@ -130,11 +149,17 @@
             <h3>{{ member.name }}</h3>
             <p><strong>{{ member.position }}</strong></p>
             <p>{{ member.description }}</p>
+            {% if member.minnect_url or member.linkedin_url %}
             <p>
-              <a href="{{ member.minnect_url | default('#') }}" target="_blank" rel="noopener noreferrer">Minnect Profile</a>
-              |
+              {% if member.minnect_url %}
+              <a href="{{ member.minnect_url }}" target="_blank" rel="noopener noreferrer">Minnect Profile</a>
+              {% endif %}
+              {% if member.minnect_url and member.linkedin_url %}|{% endif %}
+              {% if member.linkedin_url %}
               <a href="{{ member.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+              {% endif %}
             </p>
+            {% endif %}
           </article>
         {% endfor %}
       </div>

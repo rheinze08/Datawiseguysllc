@@ -38,6 +38,11 @@ def _render_without_jinja(template_text: str) -> str:
         "company_tagline",
         "Turning data into clear, actionable outcomes.",
     )
+    company_email = _extract_default_scalar(
+        template_text,
+        "company_email",
+        "datawiseguysllc@gmail.com",
+    )
     social_links = _extract_default_list_or_dict(
         template_text,
         "social_links",
@@ -50,35 +55,62 @@ def _render_without_jinja(template_text: str) -> str:
     for project in projects:
         handles = project.get("social_handles", {})
         name = project.get("name", "Project")
+        contact_email = project.get("contact_email", "")
+        contact_html = ""
+        if contact_email:
+            contact_html = (
+                "            <p>\n"
+                f'''              Contact: <a href="mailto:{contact_email}">{contact_email}</a>\n'''
+                "            </p>\n"
+            )
+        discord_html = ""
+        if handles.get("discord") and handles.get("discord") != "#":
+            discord_html = (
+                ",\n"
+                f'''              <a href="{handles.get("discord")}" target="_blank" rel="noopener noreferrer">Discord</a>'''
+            )
         project_html.append(
             f'''          <article class="project-card">\n'''
             f'''            <img src="{project.get("logo_url", "#")}" alt="{project.get("logo_alt", "Project logo")}" width="160" height="160">\n'''
             f"            <h3>{name}</h3>\n"
             f"            <p>{project.get('description', '')}</p>\n"
+            f"{contact_html}"
             f'''            <p><a href="{project.get("site_url", "#")}" target="_blank" rel="noopener noreferrer">Visit {name}</a></p>\n'''
             f"            <p>\n"
             f"              Follow {name}:\n"
             f'''              <a href="{handles.get("x", "#")}" target="_blank" rel="noopener noreferrer">X</a>,\n'''
             f'''              <a href="{handles.get("facebook", "#")}" target="_blank" rel="noopener noreferrer">Facebook</a>,\n'''
             f'''              <a href="{handles.get("instagram", "#")}" target="_blank" rel="noopener noreferrer">Instagram</a>,\n'''
-            f'''              <a href="{handles.get("tiktok", "#")}" target="_blank" rel="noopener noreferrer">TikTok</a>\n'''
+            f'''              <a href="{handles.get("tiktok", "#")}" target="_blank" rel="noopener noreferrer">TikTok</a>{discord_html}\n'''
             f"            </p>\n"
             f"          </article>"
         )
 
     team_html = []
     for member in team_members:
+        member_links = []
+        if member.get("minnect_url"):
+            member_links.append(
+                f'''              <a href="{member.get("minnect_url")}" target="_blank" rel="noopener noreferrer">Minnect Profile</a>'''
+            )
+        if member.get("linkedin_url"):
+            member_links.append(
+                f'''              <a href="{member.get("linkedin_url")}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>'''
+            )
+        links_html = ""
+        if member_links:
+            links_html = (
+                "            <p>\n"
+                f"{'              |'.join(member_links)}\n"
+                "            </p>\n"
+            )
         team_html.append(
             f'''          <article class="team-card">\n'''
             f'''            <img src="{member.get("image_url", "#")}" alt="{member.get("image_alt", "Team member")}" width="180" height="180">\n'''
             f"            <h3>{member.get('name', 'Team Member')}</h3>\n"
             f"            <p><strong>{member.get('position', '')}</strong></p>\n"
             f"            <p>{member.get('description', '')}</p>\n"
-            f"            <p>\n"
-            f'''              <a href="{member.get("minnect_url", "#")}" target="_blank" rel="noopener noreferrer">Minnect Profile</a>\n'''
-            f"              |\n"
-            f'''              <a href="{member.get("linkedin_url", "#")}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>\n'''
-            f"            </p>\n"
+            f"{links_html}"
             f"          </article>"
         )
 
@@ -93,6 +125,10 @@ def _render_without_jinja(template_text: str) -> str:
   <header>
     <h1>{company_name}</h1>
     <p>{company_tagline}</p>
+    <p>
+      Contact:
+      <a href="mailto:{company_email}">{company_email}</a>
+    </p>
 
     <nav aria-label="Social media">
       <ul>
