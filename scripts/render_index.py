@@ -61,7 +61,7 @@ STYLES = """
     .site-shell {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 24px 20px 48px;
+      padding: 32px 24px 64px;
     }
 
     .site-hero,
@@ -77,7 +77,7 @@ STYLES = """
 
     .site-hero {
       border-radius: var(--radius-xl);
-      padding: 24px;
+      padding: 32px 36px;
     }
 
     .site-hero::before {
@@ -184,9 +184,9 @@ STYLES = """
       z-index: 1;
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-      gap: 30px;
+      gap: 44px;
       align-items: center;
-      padding-top: 38px;
+      padding-top: 48px;
     }
 
     .hero-copy h1 {
@@ -216,8 +216,8 @@ STYLES = """
     .hero-panel {
       justify-self: end;
       width: 100%;
-      max-width: 360px;
-      padding: 24px;
+      max-width: 384px;
+      padding: 28px;
       border-radius: 28px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(244, 240, 233, 0.88));
       border: 1px solid rgba(22, 36, 59, 0.10);
@@ -275,17 +275,17 @@ STYLES = """
 
     .page-sections {
       display: grid;
-      gap: 24px;
-      margin-top: 28px;
+      gap: 32px;
+      margin-top: 36px;
     }
 
     .section-shell {
-      padding: 28px;
+      padding: 40px;
       border-radius: 30px;
     }
 
     .section-heading {
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     .section-heading h2 {
@@ -303,11 +303,13 @@ STYLES = """
 
     .project-group {
       display: grid;
-      gap: 16px;
+      gap: 20px;
     }
 
     .project-group + .project-group {
-      margin-top: 26px;
+      margin-top: 44px;
+      padding-top: 40px;
+      border-top: 1px solid var(--line);
     }
 
     .project-group-heading {
@@ -331,16 +333,16 @@ STYLES = """
 
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
     }
 
     .project-card {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
       min-height: 100%;
-      padding: 22px;
+      padding: 26px;
       border-radius: var(--radius-lg);
       border: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 241, 233, 0.82));
@@ -348,7 +350,7 @@ STYLES = """
     }
 
     .project-media {
-      padding: 18px;
+      padding: 20px;
       border-radius: 22px;
     }
 
@@ -396,9 +398,9 @@ STYLES = """
     .team-card {
       display: grid;
       grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-      gap: 24px;
+      gap: 36px;
       align-items: center;
-      padding: 24px;
+      padding: 32px;
       border-radius: 28px;
       border: 1px solid var(--line);
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 240, 236, 0.80));
@@ -432,19 +434,19 @@ STYLES = """
     }
 
     .member-description {
-      margin: 16px 0 0;
+      margin: 20px 0 0;
       max-width: 42rem;
       color: var(--muted);
       line-height: 1.8;
     }
 
     .profile-links {
-      margin-top: 22px;
+      margin-top: 28px;
     }
 
     .site-footer {
-      margin-top: 24px;
-      padding: 18px 24px;
+      margin-top: 36px;
+      padding: 24px 32px;
       border-radius: 26px;
       background: rgba(255, 252, 247, 0.72);
     }
@@ -480,18 +482,18 @@ STYLES = """
 
     @media (max-width: 580px) {
       .site-shell {
-        padding: 16px 14px 32px;
+        padding: 16px 14px 40px;
       }
 
       .site-hero,
       .section-shell,
       .site-footer {
-        padding: 20px;
+        padding: 24px;
       }
 
       .project-card,
       .team-card {
-        padding: 18px;
+        padding: 20px;
       }
 
       .hero-copy h1 {

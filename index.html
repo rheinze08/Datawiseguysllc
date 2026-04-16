@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Data WiseGuys, LLC</title>
   <style>
-
     :root {
       color-scheme: light;
       --bg: #f3ede2;
@@ -57,7 +56,7 @@
     .site-shell {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 24px 20px 48px;
+      padding: 32px 24px 64px;
     }
 
     .site-hero,
@@ -73,7 +72,7 @@
 
     .site-hero {
       border-radius: var(--radius-xl);
-      padding: 24px;
+      padding: 32px 36px;
     }
 
     .site-hero::before {
@@ -180,9 +179,9 @@
       z-index: 1;
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-      gap: 30px;
+      gap: 44px;
       align-items: center;
-      padding-top: 38px;
+      padding-top: 48px;
     }
 
     .hero-copy h1 {
@@ -212,8 +211,8 @@
     .hero-panel {
       justify-self: end;
       width: 100%;
-      max-width: 360px;
-      padding: 24px;
+      max-width: 384px;
+      padding: 28px;
       border-radius: 28px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(244, 240, 233, 0.88));
       border: 1px solid rgba(22, 36, 59, 0.10);
@@ -271,17 +270,17 @@
 
     .page-sections {
       display: grid;
-      gap: 24px;
-      margin-top: 28px;
+      gap: 32px;
+      margin-top: 36px;
     }
 
     .section-shell {
-      padding: 28px;
+      padding: 40px;
       border-radius: 30px;
     }
 
     .section-heading {
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     .section-heading h2 {
@@ -299,11 +298,13 @@
 
     .project-group {
       display: grid;
-      gap: 16px;
+      gap: 20px;
     }
 
     .project-group + .project-group {
-      margin-top: 26px;
+      margin-top: 44px;
+      padding-top: 40px;
+      border-top: 1px solid var(--line);
     }
 
     .project-group-heading {
@@ -327,16 +328,16 @@
 
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
     }
 
     .project-card {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
       min-height: 100%;
-      padding: 22px;
+      padding: 26px;
       border-radius: var(--radius-lg);
       border: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 241, 233, 0.82));
@@ -344,7 +345,7 @@
     }
 
     .project-media {
-      padding: 18px;
+      padding: 20px;
       border-radius: 22px;
     }
 
@@ -392,9 +393,9 @@
     .team-card {
       display: grid;
       grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-      gap: 24px;
+      gap: 36px;
       align-items: center;
-      padding: 24px;
+      padding: 32px;
       border-radius: 28px;
       border: 1px solid var(--line);
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 240, 236, 0.80));
@@ -428,19 +429,19 @@
     }
 
     .member-description {
-      margin: 16px 0 0;
+      margin: 20px 0 0;
       max-width: 42rem;
       color: var(--muted);
       line-height: 1.8;
     }
 
     .profile-links {
-      margin-top: 22px;
+      margin-top: 28px;
     }
 
     .site-footer {
-      margin-top: 24px;
-      padding: 18px 24px;
+      margin-top: 36px;
+      padding: 24px 32px;
       border-radius: 26px;
       background: rgba(255, 252, 247, 0.72);
     }
@@ -476,18 +477,18 @@
 
     @media (max-width: 580px) {
       .site-shell {
-        padding: 16px 14px 32px;
+        padding: 16px 14px 40px;
       }
 
       .site-hero,
       .section-shell,
       .site-footer {
-        padding: 20px;
+        padding: 24px;
       }
 
       .project-card,
       .team-card {
-        padding: 18px;
+        padding: 20px;
       }
 
       .hero-copy h1 {
@@ -498,10 +499,17 @@
         grid-template-columns: 1fr;
       }
     }
-
   </style>
 </head>
 <body>
+  
+  
+  
+  
+  
+  
+  
+
   <div class="site-shell">
     <header class="site-hero" id="top">
       <div class="topbar">
@@ -527,6 +535,8 @@
             <a class="hero-action hero-action-primary" href="#projects">Explore Projects</a>
             <a class="hero-action" href="mailto:datawiseguysllc@gmail.com">datawiseguysllc@gmail.com</a>
           </div>
+
+          
         </div>
 
         <aside class="hero-panel">
@@ -566,18 +576,128 @@
             <h3>Released</h3>
           </div>
           <div class="project-grid">
+          
+            
+            
+            
+            
+
+          <article class="project-card">
+            <div class="project-media">
+              <img class="project-logo" src="docs/socialsync_logo.png" alt="SocialSync logo">
+            </div>
+
+            <div class="project-copy">
+              <h3>SocialSync</h3>
+              <p class="project-description">Social media operations workspace for building and running profile-based posting workflows across Facebook, Instagram, X, and TikTok. It supports manual or AI-generated media and copy, reusable instruction stores, scheduled jobs, and analytics follow-up.</p>
+            </div>
+
+            
+            <div class="project-actions">
+              
+              
+              <a class="project-action" href="mailto:socialsyncdwg@gmail.com">Email</a>
+              
+            </div>
+            
+
+            
+            <div class="social-row">
+              
+              <a class="social-pill" href="https://x.com/socialsyncdwg" target="_blank" rel="noopener noreferrer">X</a>
+              
+              
+              <a class="social-pill" href="https://www.facebook.com/profile.php?id=61586199493081" target="_blank" rel="noopener noreferrer">Facebook</a>
+              
+              
+              <a class="social-pill" href="https://www.instagram.com/socialsyncdwg/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              
+              
+              <a class="social-pill" href="https://www.tiktok.com/@rolandheinze3?_r=1&_t=ZT-94lRhOOmUYP" target="_blank" rel="noopener noreferrer">TikTok</a>
+              
+              
+              <a class="social-pill" href="https://discord.gg/WUGqSXsryD" target="_blank" rel="noopener noreferrer">Discord</a>
+              
+            </div>
+            
+
+            
+          </article>
+          
+            
+            
+            
+            
+
           <article class="project-card">
             <div class="project-media">
               <img class="project-logo" src="docs/voice_ledger_lite_logo.png" alt="Voice Ledger Lite logo">
             </div>
+
             <div class="project-copy">
               <h3>Voice Ledger Lite</h3>
               <p class="project-description">Local-first Android journal for quick note capture, incremental rollups, and semantic search. It keeps notes on-device, builds daily through yearly rollups from the last dirty checkpoint, and falls back to built-in local heuristics when imported models are not present.</p>
             </div>
+
+            
             <div class="project-actions">
+              
               <a class="project-action project-action-primary" href="https://github.com/rheinze08/voice_ledger_lite/releases/latest/download/voice-ledger-lite-debug.apk" target="_blank" rel="noopener noreferrer">Download APK</a>
+              
+              
             </div>
+            
+
+            
+
+            
           </article>
+          
+            
+            
+            
+            
+
+          <article class="project-card">
+            <div class="project-media">
+              <img class="project-logo" src="docs/stashsage_logo.png" alt="StashSage logo">
+            </div>
+
+            <div class="project-copy">
+              <h3>StashSage</h3>
+              <p class="project-description">Path of Exile 2 pricing assistant that uses local machine-learning models, hotkey overlays, Discord-based lookups, and stash scraping to help players price rare items faster. It is built for quick decisions, practical comparisons, and less time spent manually filtering trade listings.</p>
+            </div>
+
+            
+            <div class="project-actions">
+              
+              
+              <a class="project-action" href="mailto:datawiseguysllc@gmail.com">Email</a>
+              
+            </div>
+            
+
+            
+            <div class="social-row">
+              
+              <a class="social-pill" href="https://x.com/rheinze08" target="_blank" rel="noopener noreferrer">X</a>
+              
+              
+              <a class="social-pill" href="https://www.facebook.com/profile.php?id=61582292837909" target="_blank" rel="noopener noreferrer">Facebook</a>
+              
+              
+              <a class="social-pill" href="https://www.instagram.com/heinze_roland/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              
+              
+              
+              <a class="social-pill" href="https://discord.gg/k58TnRgFPb" target="_blank" rel="noopener noreferrer">Discord</a>
+              
+            </div>
+            
+
+            
+          </article>
+          
           </div>
         </div>
 
@@ -587,63 +707,55 @@
             <h3>Developing</h3>
           </div>
           <div class="project-grid">
-          <article class="project-card">
-            <div class="project-media">
-              <img class="project-logo" src="docs/socialsync_logo.png" alt="SocialSync logo">
-            </div>
-            <div class="project-copy">
-              <h3>SocialSync</h3>
-              <p class="project-description">Social media operations workspace for building and running profile-based posting workflows across Facebook, Instagram, X, and TikTok. It supports manual or AI-generated media and copy, reusable instruction stores, scheduled jobs, and analytics follow-up.</p>
-            </div>
-            <div class="project-actions">
-              <a class="project-action" href="mailto:socialsyncdwg@gmail.com">Email</a>
-            </div>
-            <div class="social-row">
-              <a class="social-pill" href="https://x.com/socialsyncdwg" target="_blank" rel="noopener noreferrer">X</a>
-              <a class="social-pill" href="https://www.facebook.com/profile.php?id=61586199493081" target="_blank" rel="noopener noreferrer">Facebook</a>
-              <a class="social-pill" href="https://www.instagram.com/socialsyncdwg/" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a class="social-pill" href="https://www.tiktok.com/@rolandheinze3?_r=1&amp;_t=ZT-94lRhOOmUYP" target="_blank" rel="noopener noreferrer">TikTok</a>
-              <a class="social-pill" href="https://discord.gg/WUGqSXsryD" target="_blank" rel="noopener noreferrer">Discord</a>
-            </div>
-          </article>
+          
+            
+            
+            
+            
+
           <article class="project-card">
             <div class="project-media">
               <img class="project-logo" src="docs/prospectrecon_logo_20260317.png" alt="ProspectRecon logo">
             </div>
+
             <div class="project-copy">
               <h3>ProspectRecon</h3>
               <p class="project-description">Prospect intelligence pipeline that turns raw company lists into ranked, explainable target accounts. It crawls websites, stores reusable page corpora, refines ICP concepts with AI, and scores domains against the latest prospect criteria.</p>
             </div>
+
+            
+
+            
+
+            
             <p class="empty-note">Launch details coming soon.</p>
+            
           </article>
-          <article class="project-card">
-            <div class="project-media">
-              <img class="project-logo" src="docs/stashsage_logo.png" alt="StashSage logo">
-            </div>
-            <div class="project-copy">
-              <h3>StashSage</h3>
-              <p class="project-description">Path of Exile 2 pricing assistant that uses local machine-learning models, hotkey overlays, Discord-based lookups, and stash scraping to help players price rare items faster. It is built for quick decisions, practical comparisons, and less time spent manually filtering trade listings.</p>
-            </div>
-            <div class="project-actions">
-              <a class="project-action" href="mailto:datawiseguysllc@gmail.com">Email</a>
-            </div>
-            <div class="social-row">
-              <a class="social-pill" href="https://x.com/rheinze08" target="_blank" rel="noopener noreferrer">X</a>
-              <a class="social-pill" href="https://www.facebook.com/profile.php?id=61582292837909" target="_blank" rel="noopener noreferrer">Facebook</a>
-              <a class="social-pill" href="https://www.instagram.com/heinze_roland/" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a class="social-pill" href="https://discord.gg/k58TnRgFPb" target="_blank" rel="noopener noreferrer">Discord</a>
-            </div>
-          </article>
+          
+            
+            
+            
+            
+
           <article class="project-card">
             <div class="project-media">
               <img class="project-logo" src="docs/insight_connect_logo_20260310.png" alt="Insight Connect logo">
             </div>
+
             <div class="project-copy">
               <h3>Insight Connect</h3>
               <p class="project-description">AI-assisted analytics workspace for turning domain data into dashboards, generated code, and business answers. It combines modular pipelines, notebook and file context, dataset copilots, and domain modules such as supply chain and charity analysis.</p>
             </div>
+
+            
+
+            
+
+            
             <p class="empty-note">Launch details coming soon.</p>
+            
           </article>
+          
           </div>
         </div>
       </section>
@@ -658,20 +770,29 @@
         </div>
 
         <div class="team-grid">
+          
           <article class="team-card">
             <div class="team-photo-wrap">
               <img class="team-photo" src="docs/roland_heinze_portrait_20260317.png" alt="Portrait of Roland Heinze">
             </div>
+
             <div class="team-copy">
               <p class="eyebrow">Founder-led</p>
               <h3>Roland Heinze</h3>
               <p class="member-role">Founder, CEO</p>
               <p class="member-description">Founder and CEO of Data WiseGuys, LLC, leading the build-out of operator-focused automation, analytics, and decision-support products.</p>
+
+              
               <div class="profile-links">
+                
                 <a class="profile-link" href="https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                
+                
               </div>
+              
             </div>
           </article>
+          
         </div>
       </section>
     </main>
