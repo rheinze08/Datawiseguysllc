@@ -499,6 +499,21 @@
       }
     },
     {
+      'name': 'Voice Ledger Lite',
+      'logo_url': 'docs/voice_ledger_lite_logo.png',
+      'logo_alt': 'Voice Ledger Lite logo',
+      'contact_email': '',
+      'description': 'Local-first Android journal for quick note capture, incremental rollups, and semantic search. It keeps notes on-device, builds daily through yearly rollups from the last dirty checkpoint, and falls back to built-in local heuristics when imported models are not present.',
+      'site_url': 'https://github.com/rheinze08/voice_ledger_lite/releases/latest/download/voice-ledger-lite-debug.apk',
+      'site_label': 'Download APK',
+      'social_handles': {
+        'x': '#',
+        'facebook': '#',
+        'instagram': '#',
+        'tiktok': '#'
+      }
+    },
+    {
       'name': 'ProspectRecon',
       'logo_url': 'docs/prospectrecon_logo_20260317.png',
       'logo_alt': 'ProspectRecon logo',
@@ -626,7 +641,7 @@
             <p class="eyebrow">Current builds</p>
             <h2 id="projects-title">Projects</h2>
           </div>
-          <p>The portfolio spans social publishing automation, prospect research, AI-assisted analytics, and real-time pricing tools.</p>
+          <p>The portfolio spans social publishing automation, prospect research, AI-assisted analytics, mobile journaling, and real-time pricing tools.</p>
         </div>
 
         <div class="project-grid">
@@ -637,6 +652,7 @@
               'instagram': '#',
               'tiktok': '#'
             }) %}
+            {% set project_site_label = project.site_label | default('Visit Site') %}
             {% set has_project_site = project.site_url and project.site_url != '#' %}
             {% set has_project_social = (
               (project_social_handles.x and project_social_handles.x != '#') or
@@ -659,7 +675,7 @@
             {% if has_project_site or project.contact_email %}
             <div class="project-actions">
               {% if has_project_site %}
-              <a class="project-action project-action-primary" href="{{ project.site_url }}" target="_blank" rel="noopener noreferrer">Visit Site</a>
+              <a class="project-action project-action-primary" href="{{ project.site_url }}" target="_blank" rel="noopener noreferrer">{{ project_site_label }}</a>
               {% endif %}
               {% if project.contact_email %}
               <a class="project-action" href="mailto:{{ project.contact_email }}">Email</a>

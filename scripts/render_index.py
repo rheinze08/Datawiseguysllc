@@ -594,10 +594,11 @@ def _render_without_jinja(template_text: str) -> str:
         logo_url = _safe_text(project.get("logo_url"), "#")
         logo_alt = _safe_text(project.get("logo_alt"), "Project logo")
         site_url = project.get("site_url", "#")
+        site_label = _safe_text(project.get("site_label"), "Visit Site")
         contact_email = project.get("contact_email", "")
         actions = []
         if _is_live_link(site_url):
-            actions.append(_link_html(site_url, "Visit Site", "project-action project-action-primary"))
+            actions.append(_link_html(site_url, site_label, "project-action project-action-primary"))
         if contact_email:
             actions.append(_mailto_html(contact_email, "Email", "project-action"))
         actions_html = ""
@@ -743,7 +744,7 @@ def _render_without_jinja(template_text: str) -> str:
             <p class="eyebrow">Current builds</p>
             <h2 id="projects-title">Projects</h2>
           </div>
-          <p>The portfolio spans social publishing automation, prospect research, AI-assisted analytics, and real-time pricing tools.</p>
+          <p>The portfolio spans social publishing automation, prospect research, AI-assisted analytics, mobile journaling, and real-time pricing tools.</p>
         </div>
 
         <div class="project-grid">
