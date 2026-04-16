@@ -297,6 +297,34 @@
       line-height: 1.7;
     }
 
+    .project-group {
+      display: grid;
+      gap: 16px;
+    }
+
+    .project-group + .project-group {
+      margin-top: 26px;
+    }
+
+    .project-group-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .project-group-heading h3 {
+      margin: 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.4rem;
+    }
+
+    .project-group-heading .eyebrow {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.08);
+      color: var(--brand-strong);
+    }
+
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -529,10 +557,36 @@
             <p class="eyebrow">Current builds</p>
             <h2 id="projects-title">Projects</h2>
           </div>
-          <p>The portfolio spans social publishing automation, prospect research, AI-assisted analytics, mobile journaling, and real-time pricing tools.</p>
+          <p>The portfolio is split between one released product and a set of projects still in development.</p>
         </div>
 
-        <div class="project-grid">
+        <div class="project-group">
+          <div class="project-group-heading">
+            <p class="eyebrow">Released</p>
+            <h3>Released</h3>
+          </div>
+          <div class="project-grid">
+          <article class="project-card">
+            <div class="project-media">
+              <img class="project-logo" src="docs/voice_ledger_lite_logo.png" alt="Voice Ledger Lite logo">
+            </div>
+            <div class="project-copy">
+              <h3>Voice Ledger Lite</h3>
+              <p class="project-description">Local-first Android journal for quick note capture, incremental rollups, and semantic search. It keeps notes on-device, builds daily through yearly rollups from the last dirty checkpoint, and falls back to built-in local heuristics when imported models are not present.</p>
+            </div>
+            <div class="project-actions">
+              <a class="project-action project-action-primary" href="https://github.com/rheinze08/voice_ledger_lite/releases/latest/download/voice-ledger-lite-debug.apk" target="_blank" rel="noopener noreferrer">Download APK</a>
+            </div>
+          </article>
+          </div>
+        </div>
+
+        <div class="project-group">
+          <div class="project-group-heading">
+            <p class="eyebrow">Developing</p>
+            <h3>Developing</h3>
+          </div>
+          <div class="project-grid">
           <article class="project-card">
             <div class="project-media">
               <img class="project-logo" src="docs/socialsync_logo.png" alt="SocialSync logo">
@@ -550,18 +604,6 @@
               <a class="social-pill" href="https://www.instagram.com/socialsyncdwg/" target="_blank" rel="noopener noreferrer">Instagram</a>
               <a class="social-pill" href="https://www.tiktok.com/@rolandheinze3?_r=1&amp;_t=ZT-94lRhOOmUYP" target="_blank" rel="noopener noreferrer">TikTok</a>
               <a class="social-pill" href="https://discord.gg/WUGqSXsryD" target="_blank" rel="noopener noreferrer">Discord</a>
-            </div>
-          </article>
-          <article class="project-card">
-            <div class="project-media">
-              <img class="project-logo" src="docs/voice_ledger_lite_logo.png" alt="Voice Ledger Lite logo">
-            </div>
-            <div class="project-copy">
-              <h3>Voice Ledger Lite</h3>
-              <p class="project-description">Local-first Android journal for quick note capture, incremental rollups, and semantic search. It keeps notes on-device, builds daily through yearly rollups from the last dirty checkpoint, and falls back to built-in local heuristics when imported models are not present.</p>
-            </div>
-            <div class="project-actions">
-              <a class="project-action project-action-primary" href="https://github.com/rheinze08/voice_ledger_lite/releases/latest/download/voice-ledger-lite-debug.apk" target="_blank" rel="noopener noreferrer">Download APK</a>
             </div>
           </article>
           <article class="project-card">
@@ -602,6 +644,7 @@
             </div>
             <p class="empty-note">Launch details coming soon.</p>
           </article>
+          </div>
         </div>
       </section>
 

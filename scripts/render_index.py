@@ -301,6 +301,34 @@ STYLES = """
       line-height: 1.7;
     }
 
+    .project-group {
+      display: grid;
+      gap: 16px;
+    }
+
+    .project-group + .project-group {
+      margin-top: 26px;
+    }
+
+    .project-group-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .project-group-heading h3 {
+      margin: 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.4rem;
+    }
+
+    .project-group-heading .eyebrow {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.08);
+      color: var(--brand-strong);
+    }
+
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -587,8 +615,7 @@ def _render_without_jinja(template_text: str) -> str:
             + "\n          </div>\n"
         )
 
-    project_html = []
-    for project in projects:
+    def _render_project_card(project: dict) -> str:
         name = _safe_text(project.get("name"), "Project")
         description = _safe_text(_description_copy(project.get("description")))
         logo_url = _safe_text(project.get("logo_url"), "#")
@@ -622,7 +649,7 @@ def _render_without_jinja(template_text: str) -> str:
         if not actions and not social_items:
             empty_note = '            <p class="empty-note">Launch details coming soon.</p>\n'
 
-        project_html.append(
+        return (
             "          <article class=\"project-card\">\n"
             "            <div class=\"project-media\">\n"
             f"              <img class=\"project-logo\" src=\"{logo_url}\" alt=\"{logo_alt}\">\n"
@@ -636,6 +663,16 @@ def _render_without_jinja(template_text: str) -> str:
             f"{empty_note}"
             "          </article>"
         )
+
+    released_project_html = []
+    developing_project_html = []
+    for project in projects:
+        status = _safe_text(project.get("status"), "Developing")
+        card_html = _render_project_card(project)
+        if status == "Released":
+            released_project_html.append(card_html)
+        else:
+            developing_project_html.append(card_html)
 
     team_html = []
     for member in team_members:
@@ -744,11 +781,27 @@ def _render_without_jinja(template_text: str) -> str:
             <p class="eyebrow">Current builds</p>
             <h2 id="projects-title">Projects</h2>
           </div>
-          <p>The portfolio spans social publishing automation, prospect research, AI-assisted analytics, mobile journaling, and real-time pricing tools.</p>
+          <p>The portfolio is split between one released product and a set of projects still in development.</p>
         </div>
 
-        <div class="project-grid">
-{chr(10).join(project_html)}
+        <div class="project-group">
+          <div class="project-group-heading">
+            <p class="eyebrow">Released</p>
+            <h3>Released</h3>
+          </div>
+          <div class="project-grid">
+{chr(10).join(released_project_html)}
+          </div>
+        </div>
+
+        <div class="project-group">
+          <div class="project-group-heading">
+            <p class="eyebrow">Developing</p>
+            <h3>Developing</h3>
+          </div>
+          <div class="project-grid">
+{chr(10).join(developing_project_html)}
+          </div>
         </div>
       </section>
 

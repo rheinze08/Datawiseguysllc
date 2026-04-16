@@ -296,6 +296,34 @@
       line-height: 1.7;
     }
 
+    .project-group {
+      display: grid;
+      gap: 16px;
+    }
+
+    .project-group + .project-group {
+      margin-top: 26px;
+    }
+
+    .project-group-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .project-group-heading h3 {
+      margin: 0;
+      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+      font-size: 1.4rem;
+    }
+
+    .project-group-heading .eyebrow {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.08);
+      color: var(--brand-strong);
+    }
+
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -488,6 +516,7 @@
       'logo_url': 'docs/socialsync_logo.png',
       'logo_alt': 'SocialSync logo',
       'contact_email': 'socialsyncdwg@gmail.com',
+      'status': 'Developing',
       'description': 'Social media operations workspace for building and running profile-based posting workflows across Facebook, Instagram, X, and TikTok. It supports manual or AI-generated media and copy, reusable instruction stores, scheduled jobs, and analytics follow-up.',
       'site_url': '#',
       'social_handles': {
@@ -503,6 +532,7 @@
       'logo_url': 'docs/voice_ledger_lite_logo.png',
       'logo_alt': 'Voice Ledger Lite logo',
       'contact_email': '',
+      'status': 'Released',
       'description': 'Local-first Android journal for quick note capture, incremental rollups, and semantic search. It keeps notes on-device, builds daily through yearly rollups from the last dirty checkpoint, and falls back to built-in local heuristics when imported models are not present.',
       'site_url': 'https://github.com/rheinze08/voice_ledger_lite/releases/latest/download/voice-ledger-lite-debug.apk',
       'site_label': 'Download APK',
@@ -518,6 +548,7 @@
       'logo_url': 'docs/prospectrecon_logo_20260317.png',
       'logo_alt': 'ProspectRecon logo',
       'contact_email': '',
+      'status': 'Developing',
       'description': 'Prospect intelligence pipeline that turns raw company lists into ranked, explainable target accounts. It crawls websites, stores reusable page corpora, refines ICP concepts with AI, and scores domains against the latest prospect criteria.',
       'site_url': '#',
       'social_handles': {
@@ -532,6 +563,7 @@
       'logo_url': 'docs/stashsage_logo.png',
       'logo_alt': 'StashSage logo',
       'contact_email': 'datawiseguysllc@gmail.com',
+      'status': 'Developing',
       'description': 'Path of Exile 2 pricing assistant that uses local machine-learning models, hotkey overlays, Discord-based lookups, and stash scraping to help players price rare items faster. It is built for quick decisions, practical comparisons, and less time spent manually filtering trade listings.',
       'site_url': '#',
       'social_handles': {
@@ -547,6 +579,7 @@
       'logo_url': 'docs/insight_connect_logo_20260310.png',
       'logo_alt': 'Insight Connect logo',
       'contact_email': '',
+      'status': 'Developing',
       'description': 'AI-assisted analytics workspace for turning domain data into dashboards, generated code, and business answers. It combines modular pipelines, notebook and file context, dataset copilots, and domain modules such as supply chain and charity analysis.',
       'site_url': '#',
       'social_handles': {
@@ -641,11 +674,16 @@
             <p class="eyebrow">Current builds</p>
             <h2 id="projects-title">Projects</h2>
           </div>
-          <p>The portfolio spans social publishing automation, prospect research, AI-assisted analytics, mobile journaling, and real-time pricing tools.</p>
+          <p>The portfolio is split between one released product and a set of projects still in development.</p>
         </div>
 
-        <div class="project-grid">
-          {% for project in projects %}
+        <div class="project-group">
+          <div class="project-group-heading">
+            <p class="eyebrow">Released</p>
+            <h3>Released</h3>
+          </div>
+          <div class="project-grid">
+          {% for project in projects if project.status == 'Released' %}
             {% set project_social_handles = project.social_handles | default({
               'x': '#',
               'facebook': '#',
@@ -708,6 +746,79 @@
             {% endif %}
           </article>
           {% endfor %}
+          </div>
+        </div>
+
+        <div class="project-group">
+          <div class="project-group-heading">
+            <p class="eyebrow">Developing</p>
+            <h3>Developing</h3>
+          </div>
+          <div class="project-grid">
+          {% for project in projects if project.status != 'Released' %}
+            {% set project_social_handles = project.social_handles | default({
+              'x': '#',
+              'facebook': '#',
+              'instagram': '#',
+              'tiktok': '#'
+            }) %}
+            {% set project_site_label = project.site_label | default('Visit Site') %}
+            {% set has_project_site = project.site_url and project.site_url != '#' %}
+            {% set has_project_social = (
+              (project_social_handles.x and project_social_handles.x != '#') or
+              (project_social_handles.facebook and project_social_handles.facebook != '#') or
+              (project_social_handles.instagram and project_social_handles.instagram != '#') or
+              (project_social_handles.tiktok and project_social_handles.tiktok != '#') or
+              (project_social_handles.discord and project_social_handles.discord != '#')
+            ) %}
+
+          <article class="project-card">
+            <div class="project-media">
+              <img class="project-logo" src="{{ project.logo_url }}" alt="{{ project.logo_alt }}">
+            </div>
+
+            <div class="project-copy">
+              <h3>{{ project.name }}</h3>
+              <p class="project-description">{{ project.description }}</p>
+            </div>
+
+            {% if has_project_site or project.contact_email %}
+            <div class="project-actions">
+              {% if has_project_site %}
+              <a class="project-action project-action-primary" href="{{ project.site_url }}" target="_blank" rel="noopener noreferrer">{{ project_site_label }}</a>
+              {% endif %}
+              {% if project.contact_email %}
+              <a class="project-action" href="mailto:{{ project.contact_email }}">Email</a>
+              {% endif %}
+            </div>
+            {% endif %}
+
+            {% if has_project_social %}
+            <div class="social-row">
+              {% if project_social_handles.x and project_social_handles.x != '#' %}
+              <a class="social-pill" href="{{ project_social_handles.x }}" target="_blank" rel="noopener noreferrer">X</a>
+              {% endif %}
+              {% if project_social_handles.facebook and project_social_handles.facebook != '#' %}
+              <a class="social-pill" href="{{ project_social_handles.facebook }}" target="_blank" rel="noopener noreferrer">Facebook</a>
+              {% endif %}
+              {% if project_social_handles.instagram and project_social_handles.instagram != '#' %}
+              <a class="social-pill" href="{{ project_social_handles.instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a>
+              {% endif %}
+              {% if project_social_handles.tiktok and project_social_handles.tiktok != '#' %}
+              <a class="social-pill" href="{{ project_social_handles.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a>
+              {% endif %}
+              {% if project_social_handles.discord and project_social_handles.discord != '#' %}
+              <a class="social-pill" href="{{ project_social_handles.discord }}" target="_blank" rel="noopener noreferrer">Discord</a>
+              {% endif %}
+            </div>
+            {% endif %}
+
+            {% if not has_project_site and not project.contact_email and not has_project_social %}
+            <p class="empty-note">Launch details coming soon.</p>
+            {% endif %}
+          </article>
+          {% endfor %}
+          </div>
         </div>
       </section>
 
