@@ -4,6 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ company_name | default('Data WiseGuys, LLC') }}</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-72FM3KNC3X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-72FM3KNC3X');
+  </script>
   <style>
     :root {
       color-scheme: light;
@@ -596,13 +605,15 @@
       'logo_alt': 'RolyCode logo',
       'contact_email': '',
       'status': 'Developing',
-      'description': 'Local-first command center for terminal coding agents. RolyCode lets you paste messy engineering context, rewrites it into a compact prompt with a local Ollama model, previews the result, and sends the final prompt into a configured tmux target running an agent such as Codex or Claude Code.',
-      'site_url': '#',
+      'description': 'Local-first command center for coding-agent workflows, prompts, and multi-turn threads. RolyCode combines a local web UI, prompt compilation with Ollama, image attachments, desktop-to-mobile access, and routing into configured Codex, Claude Code, Gemini, Grok, or Ollama sessions.',
+      'site_url': 'https://github.com/rheinze08/RolyCode',
+      'site_label': 'View Repo',
       'social_handles': {
         'x': '#',
         'facebook': '#',
         'instagram': '#',
-        'tiktok': '#'
+        'tiktok': '#',
+        'discord': 'https://discord.gg/Y3McZBnQds'
       }
     }
   ]) %}
