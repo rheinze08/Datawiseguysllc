@@ -15,8 +15,13 @@
 
 ### DATA WISEGUYS, LLC — San Antonio, TX
 **Founder** | *August 2025 – Present*
-* **Insight Connect Platform:** Spearhead the development of Insight Connect, a small business analytics platform integrating LLMs into an intuitive web interface. Built using Flask and the OpenAI Python SDK, the platform transforms how business users interact and engage with their proprietary data.
-* **Product Development & Launch:** Developed and released StashSage, a video game utility application. Engineered an ensemble of models to generate in-game item price predictions, presented via an informative overlay. Leveraged Discord as a lightweight API. Built primarily with Tkinter, Flask, and Discord integrations. (Model results: [StashSage Portal](https://rheinze08.github.io/StashSage/))
+Lead the development of an operator-led software portfolio, turning complex workflows and domain data into practical automation, intelligence, and decision-support tools.
+* **RolyCode:** Designed a local-first command center for coding-agent workflows, combining a web UI, Ollama prompt compilation, and seamless routing across models like Codex, Claude Code, and Gemini.
+* **Insight Connect:** Spearhead the development of an AI-assisted analytics workspace integrating modular pipelines, dataset copilots, and LLMs to turn domain data into actionable dashboards and business insights.
+* **SocialSync:** Built a comprehensive social media operations workspace to manage profile-based posting workflows across Facebook, Instagram, X, and TikTok, supporting AI-generated media, reusable instruction stores, and scheduled jobs.
+* **Ledger Lite:** Developed a local-first Android journal leveraging semantic search and incremental rollups for note capture, ensuring on-device privacy with built-in fallback heuristics.
+* **StashSage:** Created an in-game pricing assistant using local machine-learning models, hotkey overlays, and Discord-based lookups to streamline trading decisions. (Model results: [StashSage Portal](https://rheinze08.github.io/StashSage/))
+* **ProspectRecon:** Architected an intelligence pipeline that crawls websites, refines ICP concepts using AI, and scores domains to convert raw company lists into ranked, explainable target accounts.
 
 ### ARCHPOINT GROUP — San Antonio, TX
 **Senior Manager, Planning & Analysis** | *May 2022 – June 2023*
