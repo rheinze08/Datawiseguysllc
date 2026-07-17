@@ -29,6 +29,7 @@ class SiteRegressionTests(unittest.TestCase):
         self.assertIn("https://www.rolycode.com", self.template)
         self.assertIn("'status': 'Released'", self.template)
         self.assertIn("'name': 'Dylan Cael'", self.template)
+        self.assertIn("'image_url': 'docs/dylan_cael_headshot_20260717.jpg'", self.template)
         self.assertIn("'position': 'Key Contributor'", self.template)
         self.assertNotIn("Voice Ledger Lite", self.template)
         self.assertNotIn("github.com/rheinze08/RolyCode", self.template)
@@ -39,7 +40,7 @@ class SiteRegressionTests(unittest.TestCase):
             'class="project-status"',
             'class="project-card-footer"',
             'class="team-grid"',
-            'class="team-photo-placeholder"',
+            'src="docs/dylan_cael_headshot_20260717.jpg"',
             'href="#team">Meet the Team',
         ):
             self.assertIn(hook, rendered)
@@ -56,6 +57,7 @@ class SiteRegressionTests(unittest.TestCase):
         self.assertEqual(rendered.count('class="project-status">Released</span>'), 4)
         self.assertEqual(rendered.count('class="project-status project-status-developing"'), 2)
         self.assertEqual(rendered.count('class="team-card"'), 2)
+        self.assertIn('src="docs/dylan_cael_headshot_20260717.jpg"', rendered)
         self.assertIn('href="https://www.rolycode.com"', rendered)
         self.assertIn('href="https://x.com/rheinze08"', rendered)
 
