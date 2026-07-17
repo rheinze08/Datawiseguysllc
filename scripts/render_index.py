@@ -547,6 +547,11 @@ def _safe_text(value: str | None, fallback: str = "") -> str:
     return escape(value or fallback)
 
 
+def _extract_styles(template_text: str) -> str:
+    match = re.search(r"<style>\s*(.*?)\s*</style>", template_text, re.DOTALL)
+    return match.group(1) if match else STYLES.strip()
+
+
 def _description_copy(value: str | None) -> str:
     if not value or "placeholder description" in value.lower():
         return "More details coming soon."
@@ -651,18 +656,23 @@ def _render_without_jinja(template_text: str) -> str:
         if not actions and not social_items:
             empty_note = '            <p class="empty-note">Launch details coming soon.</p>\n'
 
+        status = _safe_text(project.get("status"), "Developing")
+        status_class = "" if status == "Released" else " project-status-developing"
         return (
             "          <article class=\"project-card\">\n"
             "            <div class=\"project-media\">\n"
             f"              <img class=\"project-logo\" src=\"{logo_url}\" alt=\"{logo_alt}\">\n"
             "            </div>\n"
             "            <div class=\"project-copy\">\n"
+            f"              <span class=\"project-status{status_class}\">{status}</span>\n"
             f"              <h3>{name}</h3>\n"
             f"              <p class=\"project-description\">{description}</p>\n"
             "            </div>\n"
+            "            <div class=\"project-card-footer\">\n"
             f"{actions_html}"
             f"{social_html}"
             f"{empty_note}"
+            "            </div>\n"
             "          </article>"
         )
 
@@ -679,7 +689,7 @@ def _render_without_jinja(template_text: str) -> str:
     team_html = []
     for member in team_members:
         member_name = _safe_text(member.get("name"), "Team Member")
-        image_url = _safe_text(member.get("image_url"), "#")
+        image_url = _safe_text(member.get("image_url"), "")
         image_alt = _safe_text(member.get("image_alt"), "Team member")
         position = _safe_text(member.get("position"))
         description = _safe_text(member.get("description"))
@@ -696,13 +706,18 @@ def _render_without_jinja(template_text: str) -> str:
                 + "\n              </div>\n"
             )
 
+        photo_html = (
+            f'              <img class="team-photo" src="{image_url}" alt="{image_alt}">'
+            if image_url
+            else f'              <div class="team-photo-placeholder" role="img" aria-label="{image_alt}">DC</div>'
+        )
         team_html.append(
             "          <article class=\"team-card\">\n"
             "            <div class=\"team-photo-wrap\">\n"
-            f"              <img class=\"team-photo\" src=\"{image_url}\" alt=\"{image_alt}\">\n"
+            f"{photo_html}\n"
             "            </div>\n"
             "            <div class=\"team-copy\">\n"
-            "              <p class=\"eyebrow\">Founder-led</p>\n"
+            "              <p class=\"eyebrow\">Team member</p>\n"
             f"              <h3>{member_name}</h3>\n"
             f"              <p class=\"member-role\">{position}</p>\n"
             f"              <p class=\"member-description\">{description}</p>\n"
@@ -733,7 +748,7 @@ def _render_without_jinja(template_text: str) -> str:
     gtag('config', 'G-72FM3KNC3X');
   </script>
   <style>
-{STYLES}
+{_extract_styles(template_text)}
   </style>
 </head>
 <body>
@@ -747,7 +762,7 @@ def _render_without_jinja(template_text: str) -> str:
 
         <nav class="topnav" aria-label="Primary">
           <a class="nav-pill" href="#projects">Projects</a>
-          <a class="nav-pill" href="#team">Founder</a>
+          <a class="nav-pill" href="#team">Team</a>
           <a class="nav-pill nav-pill-accent" href="mailto:{escaped_company_email}">Contact</a>
         </nav>
       </div>
@@ -760,7 +775,7 @@ def _render_without_jinja(template_text: str) -> str:
 
           <div class="hero-actions">
             <a class="hero-action hero-action-primary" href="#projects">Explore Projects</a>
-            <a class="hero-action" href="mailto:{escaped_company_email}">{escaped_company_email}</a>
+            <a class="hero-action" href="#team">Meet the Team</a>
           </div>
 {company_social_html}        </div>
 
@@ -773,8 +788,8 @@ def _render_without_jinja(template_text: str) -> str:
 
           <div class="panel-meta">
             <div class="panel-stat">
-              <span class="stat-label">Founder</span>
-              <strong>Roland Heinze</strong>
+              <span class="stat-label">Team</span>
+              <strong>{len(team_members)} members</strong>
             </div>
             <div class="panel-stat">
               <span class="stat-label">Projects</span>
@@ -792,7 +807,7 @@ def _render_without_jinja(template_text: str) -> str:
             <p class="eyebrow">Current builds</p>
             <h2 id="projects-title">Projects</h2>
           </div>
-          <p>The portfolio is split between one released product and a set of projects still in development.</p>
+          <p>Released products and active builds shaped around practical workflows, signals, and decisions.</p>
         </div>
 
         <div class="project-group">
@@ -819,8 +834,8 @@ def _render_without_jinja(template_text: str) -> str:
       <section class="section-shell section-shell-team" id="team" aria-labelledby="team-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Leadership</p>
-            <h2 id="team-title">Founder Spotlight</h2>
+          <p class="eyebrow">Our people</p>
+            <h2 id="team-title">Our Team</h2>
           </div>
           <p>The company is built around hands-on product execution, with each product shaped around a clear workflow or decision problem.</p>
         </div>

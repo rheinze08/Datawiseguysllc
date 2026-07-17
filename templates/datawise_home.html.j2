@@ -45,7 +45,7 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Georgia, "Palatino Linotype", serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
         radial-gradient(circle at top left, rgba(217, 119, 69, 0.18), transparent 26%),
@@ -55,6 +55,11 @@
 
     a {
       color: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
     }
 
     img {
@@ -187,10 +192,10 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-      gap: 44px;
-      align-items: center;
-      padding-top: 48px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+      gap: 56px;
+      align-items: start;
+      padding: 64px 4px 12px;
     }
 
     .hero-copy h1 {
@@ -220,8 +225,8 @@
     .hero-panel {
       justify-self: end;
       width: 100%;
-      max-width: 384px;
-      padding: 28px;
+      max-width: 320px;
+      padding: 22px;
       border-radius: 28px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(244, 240, 233, 0.88));
       border: 1px solid rgba(22, 36, 59, 0.10);
@@ -241,8 +246,8 @@
 
     .hero-logo {
       width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
+      aspect-ratio: 5 / 4;
+      object-fit: contain;
       border-radius: 18px;
       border: 1px solid rgba(22, 36, 59, 0.10);
     }
@@ -337,16 +342,16 @@
 
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
     }
 
     .project-card {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
       min-height: 100%;
-      padding: 26px;
+      padding: 22px;
       border-radius: var(--radius-lg);
       border: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 241, 233, 0.82));
@@ -354,13 +359,16 @@
     }
 
     .project-media {
-      padding: 20px;
+      display: grid;
+      place-items: center;
+      min-height: 150px;
+      padding: 18px;
       border-radius: 22px;
     }
 
     .project-logo {
-      width: 100%;
-      aspect-ratio: 1 / 1;
+      width: min(100%, 230px);
+      height: 112px;
       object-fit: contain;
     }
 
@@ -370,6 +378,24 @@
       font-size: 1.4rem;
     }
 
+    .project-status {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.1);
+      color: var(--brand-strong);
+      font: 700 0.72rem/1 "Trebuchet MS", "Avenir Next", sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .project-status-developing {
+      background: rgba(217, 119, 69, 0.12);
+      color: #9a4d25;
+    }
+
     .project-description {
       margin: 0;
       color: var(--muted);
@@ -377,6 +403,12 @@
     }
 
     .project-actions {
+      margin-top: 16px;
+    }
+
+    .project-card-footer {
+      display: grid;
+      gap: 12px;
       margin-top: auto;
     }
 
@@ -396,15 +428,16 @@
 
     .team-grid {
       display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px;
     }
 
     .team-card {
       display: grid;
-      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-      gap: 36px;
-      align-items: center;
-      padding: 32px;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 24px;
       border-radius: 28px;
       border: 1px solid var(--line);
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 240, 236, 0.80));
@@ -421,6 +454,17 @@
       aspect-ratio: 4 / 5;
       object-fit: cover;
       border-radius: 20px;
+    }
+
+    .team-photo-placeholder {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 4 / 5;
+      border-radius: 20px;
+      background: var(--brand);
+      color: #fff;
+      font: 700 clamp(3rem, 8vw, 5rem)/1 "Trebuchet MS", "Avenir Next", sans-serif;
+      letter-spacing: 0.04em;
     }
 
     .team-copy h3 {
@@ -473,14 +517,17 @@
         flex-direction: column;
       }
 
-      .hero-grid,
-      .team-card {
+      .hero-grid {
         grid-template-columns: 1fr;
       }
 
       .hero-panel {
         justify-self: stretch;
         max-width: none;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -507,6 +554,20 @@
       .panel-meta {
         grid-template-columns: 1fr;
       }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-action,
+      .project-action {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
@@ -539,18 +600,19 @@
       }
     },
     {
-      'name': 'Voice Ledger Lite',
+      'name': 'Ledger Lite',
       'logo_url': 'docs/voice_ledger_lite_logo.png',
-      'logo_alt': 'Voice Ledger Lite logo',
+      'logo_alt': 'Ledger Lite logo',
       'contact_email': 'datawiseguysllc@gmail.com',
       'status': 'Released',
       'description': 'Local-first Android journal for quick note capture, incremental rollups, and semantic search. It keeps notes on-device, builds daily through yearly rollups from the last dirty checkpoint, and falls back to built-in local heuristics when imported models are not present.',
-      'site_url': 'https://rheinze08.github.io/voice_ledger_lite/',
+      'site_url': 'https://www.ledgerlitedwg.com',
       'social_handles': {
-        'x': '#',
-        'facebook': '#',
-        'instagram': '#',
-        'tiktok': '#'
+        'x': 'https://x.com/rheinze08',
+        'facebook': 'https://www.facebook.com/profile.php?id=61582292837909',
+        'instagram': 'https://www.instagram.com/heinze_roland/',
+        'tiktok': '#',
+        'discord': 'https://discord.gg/k58TnRgFPb'
       }
     },
     {
@@ -604,16 +666,15 @@
       'logo_url': 'docs/rolycode_logo.png',
       'logo_alt': 'RolyCode logo',
       'contact_email': '',
-      'status': 'Developing',
+      'status': 'Released',
       'description': 'Local-first command center for coding-agent workflows, prompts, and multi-turn threads. RolyCode combines a local web UI, prompt compilation with Ollama, image attachments, desktop-to-mobile access, and routing into configured Codex, Claude Code, Gemini, Grok, or Ollama sessions.',
-      'site_url': 'https://github.com/rheinze08/RolyCode',
-      'site_label': 'View Repo',
+      'site_url': 'https://www.rolycode.com',
       'social_handles': {
-        'x': '#',
-        'facebook': '#',
-        'instagram': '#',
+        'x': 'https://x.com/rheinze08',
+        'facebook': 'https://www.facebook.com/profile.php?id=61582292837909',
+        'instagram': 'https://www.instagram.com/heinze_roland/',
         'tiktok': '#',
-        'discord': 'https://discord.gg/Y3McZBnQds'
+        'discord': 'https://discord.gg/k58TnRgFPb'
       }
     }
   ]) %}
@@ -626,6 +687,15 @@
       'description': 'Founder and CEO of Data WiseGuys, LLC, leading the build-out of operator-focused automation, analytics, and decision-support products.',
       'minnect_url': '',
       'linkedin_url': 'https://www.linkedin.com/in/roland-heinze-49877542/'
+    },
+    {
+      'name': 'Dylan Cael',
+      'image_url': '',
+      'image_alt': 'Headshot placeholder for Dylan Cael',
+      'position': 'Key Contributor',
+      'description': 'Bio coming soon.',
+      'minnect_url': '',
+      'linkedin_url': ''
     }
   ]) %}
 
@@ -639,7 +709,7 @@
 
         <nav class="topnav" aria-label="Primary">
           <a class="nav-pill" href="#projects">Projects</a>
-          <a class="nav-pill" href="#team">Founder</a>
+          <a class="nav-pill" href="#team">Team</a>
           <a class="nav-pill nav-pill-accent" href="mailto:{{ company_email }}">Contact</a>
         </nav>
       </div>
@@ -652,7 +722,7 @@
 
           <div class="hero-actions">
             <a class="hero-action hero-action-primary" href="#projects">Explore Projects</a>
-            <a class="hero-action" href="mailto:{{ company_email }}">{{ company_email }}</a>
+            <a class="hero-action" href="#team">Meet the Team</a>
           </div>
 
           {% if social_links.x != '#' or social_links.facebook != '#' or social_links.instagram != '#' or social_links.tiktok != '#' %}
@@ -682,8 +752,8 @@
 
           <div class="panel-meta">
             <div class="panel-stat">
-              <span class="stat-label">Founder</span>
-              <strong>Roland Heinze</strong>
+              <span class="stat-label">Team</span>
+              <strong>{{ team_members | length }} members</strong>
             </div>
             <div class="panel-stat">
               <span class="stat-label">Projects</span>
@@ -701,7 +771,7 @@
             <p class="eyebrow">Current builds</p>
             <h2 id="projects-title">Projects</h2>
           </div>
-          <p>The portfolio is split between one released product and a set of projects still in development.</p>
+          <p>Released products and active builds shaped around practical workflows, signals, and decisions.</p>
         </div>
 
         <div class="project-group">
@@ -733,10 +803,12 @@
             </div>
 
             <div class="project-copy">
+              <span class="project-status{% if project.status != 'Released' %} project-status-developing{% endif %}">{{ project.status }}</span>
               <h3>{{ project.name }}</h3>
               <p class="project-description">{{ project.description }}</p>
             </div>
 
+            <div class="project-card-footer">
             {% if has_project_site or project.contact_email %}
             <div class="project-actions">
               {% if has_project_site %}
@@ -771,6 +843,7 @@
             {% if not has_project_site and not project.contact_email and not has_project_social %}
             <p class="empty-note">Launch details coming soon.</p>
             {% endif %}
+            </div>
           </article>
           {% endfor %}
           </div>
@@ -805,10 +878,12 @@
             </div>
 
             <div class="project-copy">
+              <span class="project-status{% if project.status != 'Released' %} project-status-developing{% endif %}">{{ project.status }}</span>
               <h3>{{ project.name }}</h3>
               <p class="project-description">{{ project.description }}</p>
             </div>
 
+            <div class="project-card-footer">
             {% if has_project_site or project.contact_email %}
             <div class="project-actions">
               {% if has_project_site %}
@@ -843,6 +918,7 @@
             {% if not has_project_site and not project.contact_email and not has_project_social %}
             <p class="empty-note">Launch details coming soon.</p>
             {% endif %}
+            </div>
           </article>
           {% endfor %}
           </div>
@@ -852,8 +928,8 @@
       <section class="section-shell section-shell-team" id="team" aria-labelledby="team-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Leadership</p>
-            <h2 id="team-title">Founder Spotlight</h2>
+            <p class="eyebrow">Our people</p>
+            <h2 id="team-title">Our Team</h2>
           </div>
           <p>The company is built around hands-on product execution, with each product shaped around a clear workflow or decision problem.</p>
         </div>
@@ -862,11 +938,15 @@
           {% for member in team_members %}
           <article class="team-card">
             <div class="team-photo-wrap">
+              {% if member.image_url %}
               <img class="team-photo" src="{{ member.image_url }}" alt="{{ member.image_alt }}">
+              {% else %}
+              <div class="team-photo-placeholder" role="img" aria-label="{{ member.image_alt }}">DC</div>
+              {% endif %}
             </div>
 
             <div class="team-copy">
-              <p class="eyebrow">Founder-led</p>
+              <p class="eyebrow">Team member</p>
               <h3>{{ member.name }}</h3>
               <p class="member-role">{{ member.position }}</p>
               <p class="member-description">{{ member.description }}</p>

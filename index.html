@@ -14,7 +14,6 @@
     gtag('config', 'G-72FM3KNC3X');
   </script>
   <style>
-
     :root {
       color-scheme: light;
       --bg: #f3ede2;
@@ -46,7 +45,7 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Georgia, "Palatino Linotype", serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
         radial-gradient(circle at top left, rgba(217, 119, 69, 0.18), transparent 26%),
@@ -56,6 +55,11 @@
 
     a {
       color: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
     }
 
     img {
@@ -188,10 +192,10 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-      gap: 44px;
-      align-items: center;
-      padding-top: 48px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+      gap: 56px;
+      align-items: start;
+      padding: 64px 4px 12px;
     }
 
     .hero-copy h1 {
@@ -221,8 +225,8 @@
     .hero-panel {
       justify-self: end;
       width: 100%;
-      max-width: 384px;
-      padding: 28px;
+      max-width: 320px;
+      padding: 22px;
       border-radius: 28px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(244, 240, 233, 0.88));
       border: 1px solid rgba(22, 36, 59, 0.10);
@@ -242,8 +246,8 @@
 
     .hero-logo {
       width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
+      aspect-ratio: 5 / 4;
+      object-fit: contain;
       border-radius: 18px;
       border: 1px solid rgba(22, 36, 59, 0.10);
     }
@@ -338,16 +342,16 @@
 
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
     }
 
     .project-card {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
       min-height: 100%;
-      padding: 26px;
+      padding: 22px;
       border-radius: var(--radius-lg);
       border: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 241, 233, 0.82));
@@ -355,13 +359,16 @@
     }
 
     .project-media {
-      padding: 20px;
+      display: grid;
+      place-items: center;
+      min-height: 150px;
+      padding: 18px;
       border-radius: 22px;
     }
 
     .project-logo {
-      width: 100%;
-      aspect-ratio: 1 / 1;
+      width: min(100%, 230px);
+      height: 112px;
       object-fit: contain;
     }
 
@@ -371,6 +378,24 @@
       font-size: 1.4rem;
     }
 
+    .project-status {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.1);
+      color: var(--brand-strong);
+      font: 700 0.72rem/1 "Trebuchet MS", "Avenir Next", sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .project-status-developing {
+      background: rgba(217, 119, 69, 0.12);
+      color: #9a4d25;
+    }
+
     .project-description {
       margin: 0;
       color: var(--muted);
@@ -378,6 +403,12 @@
     }
 
     .project-actions {
+      margin-top: 16px;
+    }
+
+    .project-card-footer {
+      display: grid;
+      gap: 12px;
       margin-top: auto;
     }
 
@@ -397,15 +428,16 @@
 
     .team-grid {
       display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px;
     }
 
     .team-card {
       display: grid;
-      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-      gap: 36px;
-      align-items: center;
-      padding: 32px;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 24px;
       border-radius: 28px;
       border: 1px solid var(--line);
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 240, 236, 0.80));
@@ -422,6 +454,17 @@
       aspect-ratio: 4 / 5;
       object-fit: cover;
       border-radius: 20px;
+    }
+
+    .team-photo-placeholder {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 4 / 5;
+      border-radius: 20px;
+      background: var(--brand);
+      color: #fff;
+      font: 700 clamp(3rem, 8vw, 5rem)/1 "Trebuchet MS", "Avenir Next", sans-serif;
+      letter-spacing: 0.04em;
     }
 
     .team-copy h3 {
@@ -474,14 +517,17 @@
         flex-direction: column;
       }
 
-      .hero-grid,
-      .team-card {
+      .hero-grid {
         grid-template-columns: 1fr;
       }
 
       .hero-panel {
         justify-self: stretch;
         max-width: none;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -508,11 +554,32 @@
       .panel-meta {
         grid-template-columns: 1fr;
       }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-action,
+      .project-action {
+        flex: 1 1 100%;
+      }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
+  
+  
+  
+  
+  
+  
+  
+
   <div class="site-shell">
     <header class="site-hero" id="top">
       <div class="topbar">
@@ -523,7 +590,7 @@
 
         <nav class="topnav" aria-label="Primary">
           <a class="nav-pill" href="#projects">Projects</a>
-          <a class="nav-pill" href="#team">Founder</a>
+          <a class="nav-pill" href="#team">Team</a>
           <a class="nav-pill nav-pill-accent" href="mailto:datawiseguysllc@gmail.com">Contact</a>
         </nav>
       </div>
@@ -536,8 +603,10 @@
 
           <div class="hero-actions">
             <a class="hero-action hero-action-primary" href="#projects">Explore Projects</a>
-            <a class="hero-action" href="mailto:datawiseguysllc@gmail.com">datawiseguysllc@gmail.com</a>
+            <a class="hero-action" href="#team">Meet the Team</a>
           </div>
+
+          
         </div>
 
         <aside class="hero-panel">
@@ -549,8 +618,8 @@
 
           <div class="panel-meta">
             <div class="panel-stat">
-              <span class="stat-label">Founder</span>
-              <strong>Roland Heinze</strong>
+              <span class="stat-label">Team</span>
+              <strong>2 members</strong>
             </div>
             <div class="panel-stat">
               <span class="stat-label">Projects</span>
@@ -568,7 +637,7 @@
             <p class="eyebrow">Current builds</p>
             <h2 id="projects-title">Projects</h2>
           </div>
-          <p>The portfolio is split between one released product and a set of projects still in development.</p>
+          <p>Released products and active builds shaped around practical workflows, signals, and decisions.</p>
         </div>
 
         <div class="project-group">
@@ -577,58 +646,207 @@
             <h3>Released</h3>
           </div>
           <div class="project-grid">
+          
+            
+            
+            
+            
+
           <article class="project-card">
             <div class="project-media">
               <img class="project-logo" src="docs/socialsync_logo.png" alt="SocialSync logo">
             </div>
+
             <div class="project-copy">
+              <span class="project-status">Released</span>
               <h3>SocialSync</h3>
               <p class="project-description">Social media operations workspace for building and running profile-based posting workflows across Facebook, Instagram, X, and TikTok. It supports manual or AI-generated media and copy, reusable instruction stores, scheduled jobs, and analytics follow-up.</p>
             </div>
+
+            <div class="project-card-footer">
+            
             <div class="project-actions">
+              
               <a class="project-action project-action-primary" href="https://www.socialsyncdwg.com" target="_blank" rel="noopener noreferrer">Visit Site</a>
+              
+              
               <a class="project-action" href="mailto:socialsyncdwg@gmail.com">Email</a>
+              
             </div>
+            
+
+            
             <div class="social-row">
+              
               <a class="social-pill" href="https://x.com/socialsyncdwg" target="_blank" rel="noopener noreferrer">X</a>
+              
+              
               <a class="social-pill" href="https://www.facebook.com/profile.php?id=61586199493081" target="_blank" rel="noopener noreferrer">Facebook</a>
+              
+              
               <a class="social-pill" href="https://www.instagram.com/socialsyncdwg/" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a class="social-pill" href="https://www.tiktok.com/@rolandheinze3?_r=1&amp;_t=ZT-94lRhOOmUYP" target="_blank" rel="noopener noreferrer">TikTok</a>
+              
+              
+              <a class="social-pill" href="https://www.tiktok.com/@rolandheinze3?_r=1&_t=ZT-94lRhOOmUYP" target="_blank" rel="noopener noreferrer">TikTok</a>
+              
+              
               <a class="social-pill" href="https://discord.gg/WUGqSXsryD" target="_blank" rel="noopener noreferrer">Discord</a>
+              
+            </div>
+            
+
+            
             </div>
           </article>
+          
+            
+            
+            
+            
+
           <article class="project-card">
             <div class="project-media">
-              <img class="project-logo" src="docs/voice_ledger_lite_logo.png" alt="Voice Ledger Lite logo">
+              <img class="project-logo" src="docs/voice_ledger_lite_logo.png" alt="Ledger Lite logo">
             </div>
+
             <div class="project-copy">
-              <h3>Voice Ledger Lite</h3>
+              <span class="project-status">Released</span>
+              <h3>Ledger Lite</h3>
               <p class="project-description">Local-first Android journal for quick note capture, incremental rollups, and semantic search. It keeps notes on-device, builds daily through yearly rollups from the last dirty checkpoint, and falls back to built-in local heuristics when imported models are not present.</p>
             </div>
+
+            <div class="project-card-footer">
+            
             <div class="project-actions">
-              <a class="project-action project-action-primary" href="https://rheinze08.github.io/voice_ledger_lite/" target="_blank" rel="noopener noreferrer">Visit Site</a>
+              
+              <a class="project-action project-action-primary" href="https://www.ledgerlitedwg.com" target="_blank" rel="noopener noreferrer">Visit Site</a>
+              
+              
               <a class="project-action" href="mailto:datawiseguysllc@gmail.com">Email</a>
+              
+            </div>
+            
+
+            
+            <div class="social-row">
+              
+              <a class="social-pill" href="https://x.com/rheinze08" target="_blank" rel="noopener noreferrer">X</a>
+              
+              
+              <a class="social-pill" href="https://www.facebook.com/profile.php?id=61582292837909" target="_blank" rel="noopener noreferrer">Facebook</a>
+              
+              
+              <a class="social-pill" href="https://www.instagram.com/heinze_roland/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              
+              
+              
+              <a class="social-pill" href="https://discord.gg/k58TnRgFPb" target="_blank" rel="noopener noreferrer">Discord</a>
+              
+            </div>
+            
+
+            
             </div>
           </article>
+          
+            
+            
+            
+            
+
           <article class="project-card">
             <div class="project-media">
               <img class="project-logo" src="docs/stashsage_logo.png" alt="StashSage logo">
             </div>
+
             <div class="project-copy">
+              <span class="project-status">Released</span>
               <h3>StashSage</h3>
               <p class="project-description">Path of Exile 2 pricing assistant that uses local machine-learning models, hotkey overlays, Discord-based lookups, and stash scraping to help players price rare items faster. It is built for quick decisions, practical comparisons, and less time spent manually filtering trade listings.</p>
             </div>
+
+            <div class="project-card-footer">
+            
             <div class="project-actions">
+              
               <a class="project-action project-action-primary" href="https://rheinze08.github.io/StashSage/" target="_blank" rel="noopener noreferrer">Visit Site</a>
+              
+              
               <a class="project-action" href="mailto:datawiseguysllc@gmail.com">Email</a>
+              
             </div>
+            
+
+            
             <div class="social-row">
+              
               <a class="social-pill" href="https://x.com/rheinze08" target="_blank" rel="noopener noreferrer">X</a>
+              
+              
               <a class="social-pill" href="https://www.facebook.com/profile.php?id=61582292837909" target="_blank" rel="noopener noreferrer">Facebook</a>
+              
+              
               <a class="social-pill" href="https://www.instagram.com/heinze_roland/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              
+              
+              
               <a class="social-pill" href="https://discord.gg/k58TnRgFPb" target="_blank" rel="noopener noreferrer">Discord</a>
+              
+            </div>
+            
+
+            
             </div>
           </article>
+          
+            
+            
+            
+            
+
+          <article class="project-card">
+            <div class="project-media">
+              <img class="project-logo" src="docs/rolycode_logo.png" alt="RolyCode logo">
+            </div>
+
+            <div class="project-copy">
+              <span class="project-status">Released</span>
+              <h3>RolyCode</h3>
+              <p class="project-description">Local-first command center for coding-agent workflows, prompts, and multi-turn threads. RolyCode combines a local web UI, prompt compilation with Ollama, image attachments, desktop-to-mobile access, and routing into configured Codex, Claude Code, Gemini, Grok, or Ollama sessions.</p>
+            </div>
+
+            <div class="project-card-footer">
+            
+            <div class="project-actions">
+              
+              <a class="project-action project-action-primary" href="https://www.rolycode.com" target="_blank" rel="noopener noreferrer">Visit Site</a>
+              
+              
+            </div>
+            
+
+            
+            <div class="social-row">
+              
+              <a class="social-pill" href="https://x.com/rheinze08" target="_blank" rel="noopener noreferrer">X</a>
+              
+              
+              <a class="social-pill" href="https://www.facebook.com/profile.php?id=61582292837909" target="_blank" rel="noopener noreferrer">Facebook</a>
+              
+              
+              <a class="social-pill" href="https://www.instagram.com/heinze_roland/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              
+              
+              
+              <a class="social-pill" href="https://discord.gg/k58TnRgFPb" target="_blank" rel="noopener noreferrer">Discord</a>
+              
+            </div>
+            
+
+            
+            </div>
+          </article>
+          
           </div>
         </div>
 
@@ -638,41 +856,61 @@
             <h3>Developing</h3>
           </div>
           <div class="project-grid">
+          
+            
+            
+            
+            
+
           <article class="project-card">
             <div class="project-media">
               <img class="project-logo" src="docs/prospectrecon_logo_20260317.png" alt="ProspectRecon logo">
             </div>
+
             <div class="project-copy">
+              <span class="project-status project-status-developing">Developing</span>
               <h3>ProspectRecon</h3>
               <p class="project-description">Prospect intelligence pipeline that turns raw company lists into ranked, explainable target accounts. It crawls websites, stores reusable page corpora, refines ICP concepts with AI, and scores domains against the latest prospect criteria.</p>
             </div>
+
+            <div class="project-card-footer">
+            
+
+            
+
+            
             <p class="empty-note">Launch details coming soon.</p>
+            
+            </div>
           </article>
+          
+            
+            
+            
+            
+
           <article class="project-card">
             <div class="project-media">
               <img class="project-logo" src="docs/insight_connect_logo_20260310.png" alt="Insight Connect logo">
             </div>
+
             <div class="project-copy">
+              <span class="project-status project-status-developing">Developing</span>
               <h3>Insight Connect</h3>
               <p class="project-description">AI-assisted analytics workspace for turning domain data into dashboards, generated code, and business answers. It combines modular pipelines, notebook and file context, dataset copilots, and domain modules such as supply chain and charity analysis.</p>
             </div>
+
+            <div class="project-card-footer">
+            
+
+            
+
+            
             <p class="empty-note">Launch details coming soon.</p>
-          </article>
-          <article class="project-card">
-            <div class="project-media">
-              <img class="project-logo" src="docs/rolycode_logo.png" alt="RolyCode logo">
-            </div>
-            <div class="project-copy">
-              <h3>RolyCode</h3>
-              <p class="project-description">Local-first command center for coding-agent workflows, prompts, and multi-turn threads. RolyCode combines a local web UI, prompt compilation with Ollama, image attachments, desktop-to-mobile access, and routing into configured Codex, Claude Code, Gemini, Grok, or Ollama sessions.</p>
-            </div>
-            <div class="project-actions">
-              <a class="project-action project-action-primary" href="https://github.com/rheinze08/RolyCode" target="_blank" rel="noopener noreferrer">View Repo</a>
-            </div>
-            <div class="social-row">
-              <a class="social-pill" href="https://discord.gg/Y3McZBnQds" target="_blank" rel="noopener noreferrer">Discord</a>
+            
             </div>
           </article>
+          
           </div>
         </div>
       </section>
@@ -680,27 +918,55 @@
       <section class="section-shell section-shell-team" id="team" aria-labelledby="team-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Leadership</p>
-            <h2 id="team-title">Founder Spotlight</h2>
+            <p class="eyebrow">Our people</p>
+            <h2 id="team-title">Our Team</h2>
           </div>
           <p>The company is built around hands-on product execution, with each product shaped around a clear workflow or decision problem.</p>
         </div>
 
         <div class="team-grid">
+          
           <article class="team-card">
             <div class="team-photo-wrap">
+              
               <img class="team-photo" src="docs/roland_heinze_portrait_20260317.png" alt="Portrait of Roland Heinze">
+              
             </div>
+
             <div class="team-copy">
-              <p class="eyebrow">Founder-led</p>
+              <p class="eyebrow">Team member</p>
               <h3>Roland Heinze</h3>
               <p class="member-role">Founder, CEO</p>
               <p class="member-description">Founder and CEO of Data WiseGuys, LLC, leading the build-out of operator-focused automation, analytics, and decision-support products.</p>
+
+              
               <div class="profile-links">
+                
                 <a class="profile-link" href="https://www.linkedin.com/in/roland-heinze-49877542/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                
+                
               </div>
+              
             </div>
           </article>
+          
+          <article class="team-card">
+            <div class="team-photo-wrap">
+              
+              <div class="team-photo-placeholder" role="img" aria-label="Headshot placeholder for Dylan Cael">DC</div>
+              
+            </div>
+
+            <div class="team-copy">
+              <p class="eyebrow">Team member</p>
+              <h3>Dylan Cael</h3>
+              <p class="member-role">Key Contributor</p>
+              <p class="member-description">Bio coming soon.</p>
+
+              
+            </div>
+          </article>
+          
         </div>
       </section>
     </main>
