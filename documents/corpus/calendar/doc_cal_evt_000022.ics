@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Company Records//Calendar Export//EN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:calendar-2026-05-24-000022@company-records.example
+DTSTAMP:20260524T000000Z
+DTSTART:20260524T150000
+DTEND:20260524T160000
+SUMMARY:Pricing rollout briefing
+DESCRIPTION:Price increase — install — $450.00 to $490.50.
+ORGANIZER;CN="Taylor Sutton":mailto:taylor.sutton@stashsageforpathofexile2poe2.example
+ATTENDEE;CN="Taylor Sutton";ROLE=REQ-PARTICIPANT:mailto:taylor.sutton@stashsageforpathofexile2poe2.example
+ATTENDEE;CN="Nadia Carr";ROLE=REQ-PARTICIPANT:mailto:nadia.carr@stashsageforpathofexile2poe2.example
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

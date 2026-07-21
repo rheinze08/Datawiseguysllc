@@ -1,0 +1,6 @@
+Channel: Leadership
+
+[2025-08-21 09:00] Nadia Carr: August 2025 recap: monthly revenue was $17,585.74.
+[2025-08-21 09:05] Anthony Ellis: We recorded 33 invoices for the month.
+[2025-08-21 09:10] Nadia Carr: Job count was 33 for August 2025.
+[2025-08-21 09:15] Anthony Ellis: Revenue, invoices, and jobs are logged for the August 2025 numbers recap.

@@ -1,0 +1,5 @@
+service_id,service_name,price,record_date,version,supersedes,effective_from,effective_to
+svc_01,install,450.00,2025-07-21,1,,2025-07-21,2026-05-24
+svc_02,repair,599.00,2025-07-21,1,,2025-07-21,
+svc_03,maintenance_plan,726.00,2025-07-21,1,,2025-07-21,
+svc_01,install,490.50,2026-05-24,2,svc_01:v1,2026-05-24,
