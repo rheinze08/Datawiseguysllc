@@ -1,6 +1,0 @@
-Channel: Leadership
-
-[2026-07-21 09:00] Nadia Carr: Quick July 2026 recap: $205,000 in monthly revenue across 400 invoices.
-[2026-07-21 09:04] Anthony Ellis: That lines up with 400 jobs for the month.
-[2026-07-21 09:08] Nadia Carr: Good — 400 invoices and 400 jobs, with monthly revenue at $205,000.
-[2026-07-21 09:12] Anthony Ellis: Noted for the Leadership recap.

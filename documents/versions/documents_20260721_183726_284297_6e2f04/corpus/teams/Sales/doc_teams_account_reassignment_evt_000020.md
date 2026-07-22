@@ -1,7 +1,0 @@
-Channel: Sales
-
-[2026-04-22 09:00] Taylor Sutton: Quick update for 2026-04-22: 51 accounts were reassigned from Jared Hale to me.
-[2026-04-22 09:05] Nadia Carr: Thanks, Taylor. I’ve noted the reassignment of all 51 accounts from Jared Hale to Taylor Sutton.
-[2026-04-22 09:10] Taylor Sutton: Confirmed — I’m the new owner for the 51 accounts reassigned from Jared Hale.
-[2026-04-22 09:15] Nadia Carr: Confirmed for the Sales channel: Jared Hale’s 51 accounts are now reassigned to Taylor Sutton.
-[2026-04-22 09:20] Taylor Sutton: Understood. The account reassignment is complete as of 2026-04-22.

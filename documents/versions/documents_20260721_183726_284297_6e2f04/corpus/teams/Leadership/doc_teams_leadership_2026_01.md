@@ -1,6 +1,0 @@
-Channel: Leadership
-
-[2026-01-21 09:00] Nadia Carr: January 2026 recap: monthly revenue was $147,500.
-[2026-01-21 09:05] Anthony Ellis: We recorded 200 invoices and 200 jobs for the month.
-[2026-01-21 09:10] Nadia Carr: Revenue, invoices, and jobs are all captured for the 2026-01 monthly recap.
-[2026-01-21 09:15] Anthony Ellis: Agreed — January 2026 numbers recap is complete.

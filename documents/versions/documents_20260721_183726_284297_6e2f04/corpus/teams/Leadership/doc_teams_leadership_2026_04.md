@@ -1,6 +1,0 @@
-Channel: Leadership
-
-[2026-04-21 00:00] Nadia Carr: April 2026 recap: monthly revenue was $187,500 across 300 invoices.
-[2026-04-21 00:00] Anthony Ellis: That matches 300 jobs for the month.
-[2026-04-21 00:00] Nadia Carr: Good, the invoice and job counts are both 300 for April 2026.
-[2026-04-21 00:00] Anthony Ellis: Noted for the Leadership numbers recap.
