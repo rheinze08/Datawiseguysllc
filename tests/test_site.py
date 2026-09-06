@@ -1,4 +1,6 @@
 import importlib.util
+import re
+from html.parser import HTMLParser
 import subprocess
 import sys
 import unittest
@@ -60,6 +62,45 @@ class SiteRegressionTests(unittest.TestCase):
         self.assertIn('src="docs/dylan_cael_headshot_20260717.jpg"', rendered)
         self.assertIn('href="https://www.rolycode.com"', rendered)
         self.assertIn('href="https://x.com/rheinze08"', rendered)
+
+    def test_redesign_content_and_accessibility_in_both_renderers(self):
+        from jinja2 import Template
+        for rendered in (Template(self.template).render(), self.renderer._render_without_jinja(self.template)):
+            with self.subTest(renderer=rendered[:30]):
+                self.assertIn('href="#main-content"', rendered)
+                self.assertIn('id="main-content"', rendered)
+                self.assertIn('Practical software for complex workflows.', rendered)
+                self.assertIn('4 released', rendered)
+                self.assertIn('2 in development', rendered)
+                self.assertNotIn('Bio coming soon.', rendered)
+                self.assertEqual(len(re.findall(r'<h4>', rendered)), 6)
+                self.assertEqual(rendered.count('https://x.com/rheinze08'), 1)
+                self.assertIn('Have a question about our products?', rendered)
+                for tag in re.findall(r'<img\b[^>]*>', rendered):
+                    self.assertRegex(tag, r'width="\d+"')
+                    self.assertRegex(tag, r'height="\d+"')
+                    if 'hero-logo' not in tag:
+                        self.assertIn('loading="lazy"', tag)
+
+    def test_renderers_have_same_visible_content_and_links(self):
+        from jinja2 import Template
+        class Page(HTMLParser):
+            def __init__(self, source):
+                super().__init__()
+                self.hidden = False
+                self.words, self.links = [], []
+                self.feed(source)
+            def handle_starttag(self, tag, attrs):
+                if tag in ('style', 'script'): self.hidden = True
+                if tag == 'a': self.links.append(dict(attrs).get('href'))
+            def handle_endtag(self, tag):
+                if tag in ('style', 'script'): self.hidden = False
+            def handle_data(self, data):
+                if not self.hidden: self.words.extend(data.split())
+        primary = Page(Template(self.template).render())
+        fallback = Page(self.renderer._render_without_jinja(self.template))
+        self.assertEqual(primary.words, fallback.words)
+        self.assertEqual(primary.links, fallback.links)
 
     def test_template_and_fallback_share_styles(self):
         rendered = self.renderer._render_without_jinja(self.template)
