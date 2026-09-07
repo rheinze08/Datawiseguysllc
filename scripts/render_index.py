@@ -9,502 +9,6 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 TEMPLATE_FILE = ROOT_DIR / "templates" / "datawise_home.html.j2"
 OUTPUT_FILE = ROOT_DIR / "index.html"
 
-STYLES = """
-    :root {
-      color-scheme: light;
-      --bg: #f3ede2;
-      --bg-deep: #e4d9c8;
-      --surface: rgba(255, 252, 247, 0.84);
-      --surface-strong: #fffdf8;
-      --ink: #16243b;
-      --muted: #5d6c75;
-      --brand: #0f766e;
-      --brand-strong: #0c5b55;
-      --accent: #d97745;
-      --line: rgba(22, 36, 59, 0.12);
-      --line-strong: rgba(22, 36, 59, 0.24);
-      --shadow: 0 28px 60px rgba(27, 38, 59, 0.14);
-      --shadow-soft: 0 20px 48px rgba(27, 38, 59, 0.09);
-      --radius-xl: 32px;
-      --radius-lg: 26px;
-      --radius-md: 18px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Georgia, "Palatino Linotype", serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(217, 119, 69, 0.18), transparent 26%),
-        radial-gradient(circle at 85% 18%, rgba(15, 118, 110, 0.16), transparent 28%),
-        linear-gradient(180deg, var(--bg) 0%, #f8f4ed 45%, var(--bg-deep) 100%);
-    }
-
-    a {
-      color: inherit;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .site-shell {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 32px 24px 64px;
-    }
-
-    .site-hero,
-    .section-shell,
-    .site-footer {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      backdrop-filter: blur(16px);
-      box-shadow: var(--shadow);
-    }
-
-    .site-hero {
-      border-radius: var(--radius-xl);
-      padding: 32px 36px;
-    }
-
-    .site-hero::before {
-      content: "";
-      position: absolute;
-      top: -80px;
-      left: -90px;
-      width: 260px;
-      height: 260px;
-      border-radius: 999px;
-      background: rgba(217, 119, 69, 0.12);
-      filter: blur(18px);
-    }
-
-    .topbar,
-    .section-heading,
-    .site-footer {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 18px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .brand-lockup {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .brand-kicker,
-    .eyebrow,
-    .panel-label,
-    .stat-label {
-      margin: 0;
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 0.74rem;
-      color: var(--muted);
-    }
-
-    .brand-name {
-      text-decoration: none;
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
-
-    .topnav,
-    .hero-actions,
-    .social-row,
-    .project-actions,
-    .profile-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .nav-pill,
-    .hero-action,
-    .project-action,
-    .social-pill,
-    .profile-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 11px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.76);
-      text-decoration: none;
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      transition:
-        transform 140ms ease,
-        border-color 140ms ease,
-        box-shadow 140ms ease,
-        background 140ms ease;
-    }
-
-    .nav-pill:hover,
-    .hero-action:hover,
-    .project-action:hover,
-    .social-pill:hover,
-    .profile-link:hover {
-      transform: translateY(-1px);
-      border-color: var(--line-strong);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .nav-pill-accent,
-    .hero-action-primary,
-    .project-action-primary {
-      background: var(--brand);
-      color: #fff;
-      border-color: transparent;
-    }
-
-    .hero-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-      gap: 44px;
-      align-items: center;
-      padding-top: 48px;
-    }
-
-    .hero-copy h1 {
-      margin: 0;
-      max-width: 10ch;
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      font-size: clamp(2.7rem, 7vw, 5.5rem);
-      line-height: 0.95;
-    }
-
-    .hero-text {
-      margin: 20px 0 0;
-      max-width: 38rem;
-      color: var(--muted);
-      font-size: 1.14rem;
-      line-height: 1.8;
-    }
-
-    .hero-actions {
-      margin-top: 24px;
-    }
-
-    .social-row {
-      margin-top: 18px;
-    }
-
-    .hero-panel {
-      justify-self: end;
-      width: 100%;
-      max-width: 384px;
-      padding: 28px;
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(244, 240, 233, 0.88));
-      border: 1px solid rgba(22, 36, 59, 0.10);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .hero-logo-shell,
-    .project-media,
-    .team-photo-wrap {
-      background: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(217, 119, 69, 0.16));
-    }
-
-    .hero-logo-shell {
-      padding: 22px;
-      border-radius: 24px;
-    }
-
-    .hero-logo {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 18px;
-      border: 1px solid rgba(22, 36, 59, 0.10);
-    }
-
-    .panel-email {
-      display: inline-block;
-      margin-top: 8px;
-      text-decoration: none;
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-    }
-
-    .panel-meta {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    .panel-stat {
-      padding: 14px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.72);
-    }
-
-    .panel-stat strong {
-      display: block;
-      margin-top: 4px;
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      font-size: 1.1rem;
-    }
-
-    .page-sections {
-      display: grid;
-      gap: 32px;
-      margin-top: 36px;
-    }
-
-    .section-shell {
-      padding: 40px;
-      border-radius: 30px;
-    }
-
-    .section-heading {
-      margin-bottom: 32px;
-    }
-
-    .section-heading h2 {
-      margin: 6px 0 0;
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      font-size: clamp(1.9rem, 4vw, 3.1rem);
-    }
-
-    .section-heading p {
-      margin: 0;
-      max-width: 34rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .project-group {
-      display: grid;
-      gap: 20px;
-    }
-
-    .project-group + .project-group {
-      margin-top: 44px;
-      padding-top: 40px;
-      border-top: 1px solid var(--line);
-    }
-
-    .project-group-heading {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .project-group-heading h3 {
-      margin: 0;
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      font-size: 1.4rem;
-    }
-
-    .project-group-heading .eyebrow {
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(15, 118, 110, 0.08);
-      color: var(--brand-strong);
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-
-    .project-card {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      min-height: 100%;
-      padding: 26px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 241, 233, 0.82));
-      box-shadow: var(--shadow-soft);
-    }
-
-    .project-media {
-      padding: 20px;
-      border-radius: 22px;
-    }
-
-    .project-logo {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: contain;
-    }
-
-    .project-card h3 {
-      margin: 0;
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      font-size: 1.4rem;
-    }
-
-    .project-description {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .project-actions {
-      margin-top: auto;
-    }
-
-    .social-pill {
-      padding: 10px 14px;
-    }
-
-    .empty-note {
-      margin: 0;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    .section-shell-team {
-      background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(240, 245, 242, 0.78));
-    }
-
-    .team-grid {
-      display: grid;
-      gap: 20px;
-    }
-
-    .team-card {
-      display: grid;
-      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-      gap: 36px;
-      align-items: center;
-      padding: 32px;
-      border-radius: 28px;
-      border: 1px solid var(--line);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 240, 236, 0.80));
-      box-shadow: var(--shadow-soft);
-    }
-
-    .team-photo-wrap {
-      padding: 14px;
-      border-radius: 24px;
-    }
-
-    .team-photo {
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      border-radius: 20px;
-    }
-
-    .team-copy h3 {
-      margin: 8px 0 0;
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-    }
-
-    .member-role {
-      margin: 8px 0 0;
-      color: var(--brand-strong);
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    .member-description {
-      margin: 20px 0 0;
-      max-width: 42rem;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .profile-links {
-      margin-top: 28px;
-    }
-
-    .site-footer {
-      margin-top: 36px;
-      padding: 24px 32px;
-      border-radius: 26px;
-      background: rgba(255, 252, 247, 0.72);
-    }
-
-    .footer-note {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .footer-note strong {
-      color: var(--ink);
-      font-family: "Trebuchet MS", "Avenir Next", sans-serif;
-    }
-
-    @media (max-width: 860px) {
-      .topbar,
-      .section-heading,
-      .site-footer {
-        flex-direction: column;
-      }
-
-      .hero-grid,
-      .team-card {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-panel {
-        justify-self: stretch;
-        max-width: none;
-      }
-    }
-
-    @media (max-width: 580px) {
-      .site-shell {
-        padding: 16px 14px 40px;
-      }
-
-      .site-hero,
-      .section-shell,
-      .site-footer {
-        padding: 24px;
-      }
-
-      .project-card,
-      .team-card {
-        padding: 20px;
-      }
-
-      .hero-copy h1 {
-        max-width: none;
-      }
-
-      .panel-meta {
-        grid-template-columns: 1fr;
-      }
-    }
-"""
 
 
 def _extract_default_scalar(template_text: str, variable: str, fallback: str) -> str:
@@ -549,7 +53,9 @@ def _safe_text(value: str | None, fallback: str = "") -> str:
 
 def _extract_styles(template_text: str) -> str:
     match = re.search(r"<style>\s*(.*?)\s*</style>", template_text, re.DOTALL)
-    return match.group(1) if match else STYLES.strip()
+    if not match:
+        raise ValueError("Homepage template must contain a style block")
+    return match.group(1)
 
 
 def _description_copy(value: str | None) -> str:
@@ -593,7 +99,7 @@ def _render_without_jinja(template_text: str) -> str:
     company_tagline = _extract_default_scalar(
         template_text,
         "company_tagline",
-        "Data WiseGuys builds operator-led software that turns messy workflows and domain data into practical automation, intelligence, and decision-support tools.",
+        "We build tools that simplify everyday work, from social publishing and personal notes to coding workflows and data analysis.",
     )
     company_email = _extract_default_scalar(
         template_text,
@@ -603,7 +109,7 @@ def _render_without_jinja(template_text: str) -> str:
     company_logo_url = _extract_default_scalar(
         template_text,
         "company_logo_url",
-        "docs/data_wiseguys_logo_20230401.jpg",
+        "output/assets/data_wiseguys_logo_20230401.webp",
     )
     social_links = _extract_default_list_or_dict(
         template_text,
@@ -661,11 +167,11 @@ def _render_without_jinja(template_text: str) -> str:
         return (
             "          <article class=\"project-card\">\n"
             "            <div class=\"project-media\">\n"
-            f"              <img class=\"project-logo\" src=\"{logo_url}\" alt=\"{logo_alt}\">\n"
+            f"              <img class=\"project-logo\" width=\"220\" height=\"112\" loading=\"lazy\" decoding=\"async\" src=\"{logo_url}\" alt=\"{logo_alt}\">\n"
             "            </div>\n"
             "            <div class=\"project-copy\">\n"
             f"              <span class=\"project-status{status_class}\">{status}</span>\n"
-            f"              <h3>{name}</h3>\n"
+            f"              <h4>{name}</h4>\n"
             f"              <p class=\"project-description\">{description}</p>\n"
             "            </div>\n"
             "            <div class=\"project-card-footer\">\n"
@@ -707,7 +213,7 @@ def _render_without_jinja(template_text: str) -> str:
             )
 
         photo_html = (
-            f'              <img class="team-photo" src="{image_url}" alt="{image_alt}">'
+            f'              <img class="team-photo" width="112" height="140" loading="lazy" decoding="async" src="{image_url}" alt="{image_alt}">'
             if image_url
             else f'              <div class="team-photo-placeholder" role="img" aria-label="{image_alt}">DC</div>'
         )
@@ -717,7 +223,6 @@ def _render_without_jinja(template_text: str) -> str:
             f"{photo_html}\n"
             "            </div>\n"
             "            <div class=\"team-copy\">\n"
-            "              <p class=\"eyebrow\">Team member</p>\n"
             f"              <h3>{member_name}</h3>\n"
             f"              <p class=\"member-role\">{position}</p>\n"
             f"              <p class=\"member-description\">{description}</p>\n"
@@ -752,6 +257,7 @@ def _render_without_jinja(template_text: str) -> str:
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
     <header class="site-hero" id="top">
       <div class="topbar">
@@ -770,7 +276,7 @@ def _render_without_jinja(template_text: str) -> str:
       <div class="hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">Operator-led data ventures</p>
-          <h1>{escaped_company_name}</h1>
+          <h1>Practical software for complex workflows.</h1>
           <p class="hero-text">{escaped_company_tagline}</p>
 
           <div class="hero-actions">
@@ -781,26 +287,15 @@ def _render_without_jinja(template_text: str) -> str:
 
         <aside class="hero-panel">
           <div class="hero-logo-shell">
-            <img class="hero-logo" src="{escaped_company_logo_url}" alt="Data WiseGuys, LLC logo">
+            <img class="hero-logo" width="300" height="240" src="{escaped_company_logo_url}" alt="Data WiseGuys, LLC logo">
           </div>
-          <p class="panel-label">Primary contact</p>
-          <a class="panel-email" href="mailto:{escaped_company_email}">{escaped_company_email}</a>
-
-          <div class="panel-meta">
-            <div class="panel-stat">
-              <span class="stat-label">Team</span>
-              <strong>{len(team_members)} members</strong>
-            </div>
-            <div class="panel-stat">
-              <span class="stat-label">Projects</span>
-              <strong>{project_count}</strong>
-            </div>
-          </div>
+          <p class="panel-label">Independent software studio</p>
+          <p class="portfolio-summary"><strong>{len(released_project_html)} released</strong> &middot; {len(developing_project_html)} in development</p>
         </aside>
       </div>
     </header>
 
-    <main class="page-sections">
+    <main class="page-sections" id="main-content" tabindex="-1">
       <section class="section-shell" id="projects" aria-labelledby="projects-title">
         <div class="section-heading">
           <div>
@@ -812,7 +307,6 @@ def _render_without_jinja(template_text: str) -> str:
 
         <div class="project-group">
           <div class="project-group-heading">
-            <p class="eyebrow">Released</p>
             <h3>Released</h3>
           </div>
           <div class="project-grid">
@@ -822,7 +316,6 @@ def _render_without_jinja(template_text: str) -> str:
 
         <div class="project-group">
           <div class="project-group-heading">
-            <p class="eyebrow">Developing</p>
             <h3>Developing</h3>
           </div>
           <div class="project-grid">
@@ -847,8 +340,19 @@ def _render_without_jinja(template_text: str) -> str:
     </main>
 
     <footer class="site-footer">
-      <p class="footer-note"><strong>{escaped_company_name}</strong> builds focused software that turns workflows, signals, and domain data into practical tools people can use immediately.</p>
-      <a class="nav-pill nav-pill-accent" href="mailto:{escaped_company_email}">Get in Touch</a>
+      <div class="contact-row">
+        <div><h2>Have a question about our products?</h2><a class="panel-email" href="mailto:{escaped_company_email}">{escaped_company_email}</a></div>
+        <a class="nav-pill nav-pill-accent" href="mailto:{escaped_company_email}">Get in Touch</a>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-note">{escaped_company_name} &middot; Independent software studio</p>
+        <div class="social-row" aria-label="Founder social profiles">
+          <a class="social-pill" href="https://x.com/rheinze08" target="_blank" rel="noopener noreferrer">X</a>
+          <a class="social-pill" href="https://www.facebook.com/profile.php?id=61582292837909" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <a class="social-pill" href="https://www.instagram.com/heinze_roland/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a class="social-pill" href="https://discord.gg/k58TnRgFPb" target="_blank" rel="noopener noreferrer">Discord</a>
+        </div>
+      </div>
     </footer>
   </div>
 </body>

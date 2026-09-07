@@ -14,7 +14,7 @@ if [[ "${1:-}" == "--deploy" ]]; then
   fi
 
   CURRENT_BRANCH="$(git -C "$ROOT_DIR" rev-parse --abbrev-ref HEAD)"
-  git -C "$ROOT_DIR" add index.html
+  git -C "$ROOT_DIR" add index.html output/assets
   if ! git -C "$ROOT_DIR" diff --cached --quiet; then
     git -C "$ROOT_DIR" commit -m "Build GitHub Pages index.html"
   fi
