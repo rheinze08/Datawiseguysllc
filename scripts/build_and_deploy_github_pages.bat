@@ -23,7 +23,7 @@ if /I "%~1"=="--deploy" (
   )
 
   for /f "delims=" %%b in ('git -C "%ROOT_DIR%" rev-parse --abbrev-ref HEAD') do set "CURRENT_BRANCH=%%b"
-  git -C "%ROOT_DIR%" add index.html
+  git -C "%ROOT_DIR%" add index.html output/assets
   git -C "%ROOT_DIR%" diff --cached --quiet
   if errorlevel 1 git -C "%ROOT_DIR%" commit -m "Build GitHub Pages index.html"
 

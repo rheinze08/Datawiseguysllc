@@ -31,8 +31,8 @@ class SiteRegressionTests(unittest.TestCase):
         self.assertIn("https://www.rolycode.com", self.template)
         self.assertIn("'status': 'Released'", self.template)
         self.assertIn("'name': 'Dylan Cael'", self.template)
-        self.assertIn("'image_url': 'docs/dylan_cael_headshot_20260717.jpg'", self.template)
-        self.assertIn("'position': 'Key Contributor'", self.template)
+        self.assertIn("'image_url': 'output/assets/dylan_cael_headshot_20260717.webp'", self.template)
+        self.assertIn("'position': 'AI Engineer'", self.template)
         self.assertNotIn("Voice Ledger Lite", self.template)
         self.assertNotIn("github.com/rheinze08/RolyCode", self.template)
 
@@ -42,7 +42,7 @@ class SiteRegressionTests(unittest.TestCase):
             'class="project-status"',
             'class="project-card-footer"',
             'class="team-grid"',
-            'src="docs/dylan_cael_headshot_20260717.jpg"',
+            'src="output/assets/dylan_cael_headshot_20260717.webp"',
             'href="#team">Meet the Team',
         ):
             self.assertIn(hook, rendered)
@@ -59,7 +59,7 @@ class SiteRegressionTests(unittest.TestCase):
         self.assertEqual(rendered.count('class="project-status">Released</span>'), 4)
         self.assertEqual(rendered.count('class="project-status project-status-developing"'), 2)
         self.assertEqual(rendered.count('class="team-card"'), 2)
-        self.assertIn('src="docs/dylan_cael_headshot_20260717.jpg"', rendered)
+        self.assertIn('src="output/assets/dylan_cael_headshot_20260717.webp"', rendered)
         self.assertIn('href="https://www.rolycode.com"', rendered)
         self.assertIn('href="https://x.com/rheinze08"', rendered)
 
@@ -71,6 +71,8 @@ class SiteRegressionTests(unittest.TestCase):
                 self.assertIn('id="main-content"', rendered)
                 self.assertIn('Practical software for complex workflows.', rendered)
                 self.assertIn('4 released', rendered)
+                for text in ('Senior Data Scientist', 'Economics', 'AI Engineer', 'Computer Science'):
+                    self.assertIn(text, rendered)
                 self.assertIn('2 in development', rendered)
                 self.assertNotIn('Bio coming soon.', rendered)
                 self.assertEqual(len(re.findall(r'<h4>', rendered)), 6)
@@ -101,6 +103,18 @@ class SiteRegressionTests(unittest.TestCase):
         fallback = Page(self.renderer._render_without_jinja(self.template))
         self.assertEqual(primary.words, fallback.words)
         self.assertEqual(primary.links, fallback.links)
+
+    def test_local_images_exist_and_are_optimized(self):
+        rendered = self.renderer._render_without_jinja(self.template)
+        for source in re.findall(r'<img[^>]*src="([^"]+)"', rendered):
+            asset = ROOT / source
+            self.assertTrue(asset.is_file(), source)
+            self.assertLess(asset.stat().st_size, 150_000, source)
+
+    def test_deploy_includes_optimized_assets(self):
+        for suffix in ('sh', 'bat'):
+            script = (ROOT / 'scripts' / ('build_and_deploy_github_pages.' + suffix)).read_text()
+            self.assertIn('add index.html output/assets', script)
 
     def test_template_and_fallback_share_styles(self):
         rendered = self.renderer._render_without_jinja(self.template)
