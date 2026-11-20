@@ -58,6 +58,21 @@ def _extract_styles(template_text: str) -> str:
     return match.group(1)
 
 
+def _render_services(template_text: str, projects: list[dict], company_email: str) -> str:
+    # Keep the section's copy in the template for both rendering paths.
+    match = re.search(r"\{% block services %\}(.*?)\{% endblock %\}", template_text, re.DOTALL)
+    if not match:
+        raise ValueError("Homepage template must contain the services block")
+    socialsync = next((project for project in projects if project.get("name") == "SocialSync"), {})
+    destination = socialsync.get("site_url")
+    if not _is_live_link(destination):
+        destination = "#socialsync" if socialsync else "#projects"
+    section = match.group(1).strip()
+    return section.replace("{{ socialsync_url | e }}", escape(destination)).replace(
+        "{{ company_email }}", escape(company_email)
+    )
+
+
 def _description_copy(value: str | None) -> str:
     if not value or "placeholder description" in value.lower():
         return "More details coming soon."
@@ -130,6 +145,7 @@ def _render_without_jinja(template_text: str) -> str:
 
     def _render_project_card(project: dict) -> str:
         name = _safe_text(project.get("name"), "Project")
+        card_id = ' id="socialsync"' if name == "SocialSync" else ""
         description = _safe_text(_description_copy(project.get("description")))
         logo_url = _safe_text(project.get("logo_url"), "#")
         logo_alt = _safe_text(project.get("logo_alt"), "Project logo")
@@ -165,7 +181,7 @@ def _render_without_jinja(template_text: str) -> str:
         status = _safe_text(project.get("status"), "Developing")
         status_class = "" if status == "Released" else " project-status-developing"
         return (
-            "          <article class=\"project-card\">\n"
+            f'          <article class="project-card"{card_id}>\n'
             "            <div class=\"project-media\">\n"
             f"              <img class=\"project-logo\" width=\"220\" height=\"112\" loading=\"lazy\" decoding=\"async\" src=\"{logo_url}\" alt=\"{logo_alt}\">\n"
             "            </div>\n"
@@ -268,6 +284,7 @@ def _render_without_jinja(template_text: str) -> str:
 
         <nav class="topnav" aria-label="Primary">
           <a class="nav-pill" href="#projects">Projects</a>
+          <a class="nav-pill" href="#services">Services</a>
           <a class="nav-pill" href="#team">Team</a>
           <a class="nav-pill nav-pill-accent" href="mailto:{escaped_company_email}">Contact</a>
         </nav>
@@ -281,6 +298,7 @@ def _render_without_jinja(template_text: str) -> str:
 
           <div class="hero-actions">
             <a class="hero-action hero-action-primary" href="#projects">Explore Projects</a>
+            <a class="hero-action" href="#services">Explore Services</a>
             <a class="hero-action" href="#team">Meet the Team</a>
           </div>
 {company_social_html}        </div>
@@ -323,6 +341,8 @@ def _render_without_jinja(template_text: str) -> str:
           </div>
         </div>
       </section>
+
+      {_render_services(template_text, projects, company_email)}
 
       <section class="section-shell section-shell-team" id="team" aria-labelledby="team-title">
         <div class="section-heading">

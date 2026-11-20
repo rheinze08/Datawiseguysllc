@@ -57,6 +57,17 @@
     .project-group-heading h3 { font-size:16px; font-weight:600; letter-spacing:0; }
     .project-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
     .project-card { display:flex; flex-direction:column; gap:24px; padding:24px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:0 3px 12px #142d3504; }
+    .service-list { margin:0; }
+    .service-list .project-card { gap:8px; }
+    .service-list dt,.service-details h3 { font-size:1.25rem; font-weight:650; }
+    .service-list dd,.service-details p,.service-details ul { margin:0; color:var(--muted); }
+    .service-details { margin-block:32px; }
+    .service-details h3 { margin-bottom:12px; }
+    .service-details ul { padding-left:1.25rem; }
+    .service-details li + li { margin-top:8px; }
+    .service-details strong { color:var(--ink); }
+    .service-details a { color:var(--brand); }
+    .service-contact { border-top:1px solid var(--line); padding-top:24px; }
     .project-media { display:grid; place-items:center; height:144px; padding:16px; background:#f3f6f3; border-radius:10px; }
     .project-logo { width:220px; height:112px; object-fit:contain; }
     .project-status { display:inline-block; margin-bottom:12px; padding:4px 8px; border-radius:5px; color:var(--brand-strong); background:#e8f3ed; font-size:11px; font-weight:650; }
@@ -109,6 +120,7 @@
 
         <nav class="topnav" aria-label="Primary">
           <a class="nav-pill" href="#projects">Projects</a>
+          <a class="nav-pill" href="#services">Services</a>
           <a class="nav-pill" href="#team">Team</a>
           <a class="nav-pill nav-pill-accent" href="mailto:datawiseguysllc@gmail.com">Contact</a>
         </nav>
@@ -122,6 +134,7 @@
 
           <div class="hero-actions">
             <a class="hero-action hero-action-primary" href="#projects">Explore Projects</a>
+            <a class="hero-action" href="#services">Explore Services</a>
             <a class="hero-action" href="#team">Meet the Team</a>
           </div>
 
@@ -159,7 +172,7 @@
             
             
 
-          <article class="project-card">
+          <article class="project-card" id="socialsync">
             <div class="project-media">
               <img class="project-logo" width="220" height="112" loading="lazy" decoding="async" src="output/assets/socialsync_logo.webp" alt="SocialSync logo">
             </div>
@@ -372,6 +385,59 @@
           </div>
         </div>
       </section>
+
+
+
+
+      <section class="section-shell" id="services" aria-labelledby="services-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Services</p>
+            <h2 id="services-title">Data and AI help for small businesses</h2>
+          </div>
+        </div>
+
+        <dl class="project-grid service-list">
+          <div class="project-card">
+            <dt>Make sense of your sales</dt>
+            <dd>See sales and refunds in one weekly dashboard. We check the totals against your register so you can trust the report.</dd>
+          </div>
+          <div class="project-card">
+            <dt>Forecast what to stock</dt>
+            <dd>A bakery can use past Saturday sales to estimate how many loaves to bake for the coming weekend.</dd>
+          </div>
+          <div class="project-card">
+            <dt>Automate repetitive work</dt>
+            <dd>If you copy orders into a spreadsheet every Friday, we can pull them in automatically and email you the finished report.</dd>
+          </div>
+          <div class="project-card">
+            <dt>Build an AI helper for your team</dt>
+            <dd>Give staff an assistant that answers “Can I return a sale item?” from your shop’s return policy and shows where it found the answer.</dd>
+          </div>
+        </dl>
+
+        <div class="project-grid service-details">
+          <div>
+            <h3>Examples from our work</h3>
+            <ul>
+              <li><strong>StashSage</strong> estimates prices for Path of Exile 2 items with a machine-learning model we trained on more than 500,000 listings.</li>
+              <li><strong>SocialSync</strong> lets creators schedule one post and send it to several platforms from the same workspace.</li>
+              <li><strong>Ledger Lite</strong> helps with everyday bookkeeping by keeping expenses organized by category.</li>
+              <li><strong>Insight Connect</strong> uses business data to answer questions like “Which products sold best last month?” in plain English.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>For creators</h3>
+            <p>With <a href="https://www.socialsyncdwg.com">SocialSync</a>, you can upload a video once, choose when it goes out, and post to Instagram, Facebook, TikTok, and YouTube from one place.</p>
+          </div>
+        </div>
+
+        <div class="contact-row service-contact">
+          <p>What would you like help with in your business?</p>
+          <a class="nav-pill nav-pill-accent" href="mailto:datawiseguysllc@gmail.com">Get in Touch</a>
+        </div>
+      </section>
+
 
       <section class="section-shell section-shell-team" id="team" aria-labelledby="team-title">
         <div class="section-heading">
